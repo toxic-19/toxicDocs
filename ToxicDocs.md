@@ -6,7 +6,7 @@ tags:
 categories:
  - 教程
 sidebar: 'auto'
-
+sticky: 1
 ---
 
 # 记搭建VuePress个人网站

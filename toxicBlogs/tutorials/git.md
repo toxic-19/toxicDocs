@@ -372,7 +372,7 @@ HEAD is now at 9bc98cd 新建hello.html文件，修改readme文件
 
    使用 `git reflog` 可以记录你的每一次命令：
 
- ![image-20230117131838821](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117131838821.png)
+ ![image-20230117131838821](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117131838821.png)
 
 > 可以在你执行过的命令里看到每一次提交commit，即在这里可以获取到你要回到的版本 commit id 的前几位。当然这已经够使用。
 
@@ -384,7 +384,7 @@ HEAD is now at 9bc98cd 新建hello.html文件，修改readme文件
 
 > 测试：目前暂存区应该是清空的。使用 `git status `查看一下
 >
-> 修改：在index.html中添加一行。目前状态是：`modified:   learnGit/hello.html  ` 
+> 修改：在index.html中添加一行。目前状态是：`modified:   learnGit/hello.html  ` 
 
 ```sh
 Toxic@LAPTOP-1AN9SJJM MINGW32 /d/git_project/newGit-Study (master)
@@ -420,7 +420,7 @@ index 82cbe8a..f634043 100644
 
 > 添加到暂存区；再进行一次修改。
 >
->  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117150758995.png" alt="image-20230117150758995" style="zoom:77%;" />
+>   <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117150758995.png" alt="image-20230117150758995" style="zoom:77%;" />
 >
 > **流程**：第一次修改 ==> 添加到暂存区 ==> 第二次修改 ==> 提交。最终提交的是第一次修改的内容。
 >
@@ -481,7 +481,7 @@ index 82cbe8a..f634043 100644
 
 3.  **删除文件**：已经被commit到本地仓库的文件，希望删除并使工作区和版本库状态一致。
 
-    <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117175120104.png" alt="image-20230117175120104" style="zoom:80%;" />
+    <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117175120104.png" alt="image-20230117175120104" style="zoom:80%;" />
 
 > 在文件管理器中删除。相当于在工作区中进行删除。其实也是一种修改。所以查看状态会出现删除文件的提示信息。
 >
@@ -492,7 +492,7 @@ index 82cbe8a..f634043 100644
 > 1. 使用命令行 `git restore uselessText.txt` , 删除被撤销了。同理` git checkout -- uselessText.txt` 也可以达到。
 > 2. 可以不需要在工作区删除；执行 `git rm <fileName>` 删除版本库中的内容，再进行`git commit`。
 >
->  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117180144948.png" alt="image-20230117180144948" style="zoom:90%;" />
+>  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117180144948.png" alt="image-20230117180144948" style="zoom:90%;" />
 
 
 
@@ -510,9 +510,9 @@ index 82cbe8a..f634043 100644
 
    ​            推送命令：`git push origin master`
 
-              查看远程库信息： `git remote -v`
+              查看远程库信息： `git remote -v`
 
-    <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117191243144.png" alt="image-20230117191243144" style="zoom:80%;" />
+    <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117191243144.png" alt="image-20230117191243144" style="zoom:80%;" />
 
 
 
@@ -539,11 +539,11 @@ $ git branch                                      # 查看当前项目的分支
   master
 ```
 
- ![image-20230117194437008](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117194437008.png)
+ ![image-20230117194437008](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117194437008.png)
 
 :arrow_up_small:   可以看到其实在 commit 时会显示在哪个分支上。同时也会有commit id的后几位。不知道有没有用
 
- ![image-20230117194658332](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117194658332.png)
+ ![image-20230117194658332](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117194658332.png)
 
 :arrow_up_small:   切换回master分支：查看刚刚修改的文件，发现没有存dev时修改的内容。master和dev分支是相互独立的。
 
@@ -555,7 +555,7 @@ $ git branch                                      # 查看当前项目的分支
 
 :arrow_up_small: 删除当前分支：记住要切换到master分支上，再进行删除。
 
- <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117203222113.png" alt="image-20230117203222113" style="zoom:80%;" />
+ <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117203222113.png" alt="image-20230117203222113" style="zoom:80%;" />
 
 
 
@@ -575,11 +575,11 @@ $ git branch                                      # 查看当前项目的分支
 
  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117205329265.png" alt="image-20230117205329265" style="zoom:80%;" />
 
-再进行提交。使用 `git log --graph` 可以看到分支的合并情况。
+再进行提交。使用 `git log --graph` 可以看到分支的合并情况。
 
  ![image-20230117210247441](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117210247441.png)
 
- <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117210653683.png" alt="image-20230117210653683" style="zoom:80%;" />
+ <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117210653683.png" alt="image-20230117210653683" style="zoom:80%;" />
 
 
 
@@ -632,7 +632,7 @@ $ git commit -m "description"           # 删除掉该文件之后，应该提�
 $ git remote add origin <ssh repo address>
 
 # 9. 向远程推送本地仓库分支的代码
-$ git push -u origin master             # 将当前分支的代码推送到origin的master分支上。
+$ git push -u origin "master"           # 将当前分支的代码推送到origin的master分支上。
 
 # 10. 创建并切换分支dev
 $ git checkout -b dev                   # 创建并切换
@@ -682,4 +682,4 @@ $ git log --graph
 $ git push origin dev
 ```
 
-有点累不看了 [廖雪峰的官方网站](https://www.liaoxuefeng.com/) 大概看到标签。
+有点累不看了 [廖雪峰的官方网站](https://www.liaoxuefeng.com/) 大概看到标签。
