@@ -420,7 +420,7 @@ index 82cbe8a..f634043 100644
 
 > 添加到暂存区；再进行一次修改。
 >
->   <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117150758995.png" alt="image-20230117150758995" style="zoom:77%;" />
+>   <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117150758995.png" alt="image-20230117150758995" style="zoom:77%;" />
 >
 > **流程**：第一次修改 ==> 添加到暂存区 ==> 第二次修改 ==> 提交。最终提交的是第一次修改的内容。
 >
@@ -683,3 +683,9 @@ $ git push origin dev
 ```
 
 有点累不看了 [廖雪峰的官方网站](https://www.liaoxuefeng.com/) 大概看到标签。
+
+
+
+[一篇带你用 VuePress + Github Pages 搭建博客 · Issue #235 · mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog/issues/235)
+
+ ![image-20230126014306174](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230126014306174.png)

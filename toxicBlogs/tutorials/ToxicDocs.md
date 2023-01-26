@@ -9,7 +9,7 @@ sidebar: 'auto'
 sticky: 1
 ---
 
-# 记搭建VuePress个人网站
+
 
 ## 1. 准备阶段
 
@@ -260,3 +260,125 @@ https://juejin.cn/post/6959403986495471647#heading-19
 https://blog.csdn.net/xiaoxianer321/article/details/119548202
 
 https://vuepress.vuejs.org/zh/theme/default-theme-config.html#%E4%BE%A7%E8%BE%B9%E6%A0%8F
+
+
+
+## 3. 部署到github上
+
+:punch: 前情提要：之前打算部署到gitee pages上，但正直新年，实名审核很慢。所以就先部署到github上过过瘾。主要访问速度有点慢。
+
+### 前提：上传
+
+之前肯定是先上传到`gitee`上了，那么我们现在要将同一个项目上传到`github`上。虽然我做完之后觉得将项目上传到`github`并没有什么意义。但是还是上传一下，做个备份。
+
+参考链接 ： [(60条消息) 将一个项目同时提交到GitHub和Gitee(码云)上面（GitHub与Gitee保持同步）](https://blog.csdn.net/weixin_44893902/article/details/125147574)
+
+1. 将 gitee 的仓库地址复制过来。在 github上 导入一个已有仓库，导入即可。
+
+2. 导入成功之后，建立本地仓库与远程 gitee 和 github 仓库的链接。查看  `.git` 文件夹下的 `config` 文件：
+
+   没被修改过的应该长这样：
+
+    <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230126163009271.png" alt="image-20230126163009271" style="zoom:70%;" />
+
+   > 修改有两个远程仓库：remote的两个名字主要是为了 push 的时候进行分辨。不同即可。
+
+   ```sh
+   # .git下的config文件
+   [core]
+   	repositoryformatversion = 0
+   	filemode = false
+   	bare = false
+   	logallrefupdates = true
+   	symlinks = false
+   	ignorecase = true
+   [remote "gitee"]
+   	url = git@gitee.com:zhizhu_wlz/toxic-docs.git
+   	fetch = +refs/heads/*:refs/remotes/gitee/*
+   [remote "github"]
+       url = git@github.com:toxic-19/toxicDocs.git
+       fetch = +refs/heads/*:refs/remotes/github/*
+   [branch "master"]
+   	remote = origin
+   	merge = refs/heads/master
+   ```
+
+   >  上传时：
+
+   ```bash
+   git push gitee master  # 上传到gitee仓库的master分支
+   git push github master # 上传到github仓库的master分支
+   ```
+
+3. 新建部署脚本`deploy-gh.sh`
+
+   ```sh
+   #!/usr/bin/env sh
+   
+   # 确保脚本抛出遇到的错误
+   set -e
+   
+   # 生成静态文件
+   npm run build
+   
+   # 进入生成的文件夹
+   cd .vuepress/dist
+   
+   # 如果是发布到自定义域名
+   # echo 'www.example.com' > CNAME
+   
+   git init
+   git add -A
+   git commit -m 'deploy'
+   
+   # 如果发布到 https://<USERNAME>.github.io
+   # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
+   
+   # 如果发布到 https://<USERNAME>.github.io/<REPO>
+   # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
+   
+   # 把上面的 <USERNAME> 换成你自己的 Github 用户名，<REPO> 换成仓库名，比如我这里就是：
+   git push -f git@github.com:toxic-19/toxicDocs.git master:gh-pages
+   
+   cd -
+   ```
+
+   > 1. 生成静态文件的命令行：主要看 `package.json` 中是怎么写的保持一致。我写的是：`"build": "vuepress build ."`
+   >
+   > 2. 进入生成的文件夹dist，一般都是在 配置文件夹 .vuepress 下。所以要看你自己的层级目录：
+   >
+   >     <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230126164217547.png" alt="image-20230126164217547" style="zoom:80%;" />
+   >
+   > 3. 进入到dist文件夹，进行git操作。最后push到远程仓库上，其实是推送到该`github`仓库的 `gh-pages` 分支。
+
+4. 运行脚本文件。其实可以直接运行 bash命令。
+
+   ```json
+   // 在package.json上新增命令：
+     "scripts": {
+       "dev": "vuepress dev . --host \"localhost\"",
+       "build": "vuepress build .",
+       "deploy": "bash deploy-gh.sh"
+     },
+   ```
+
+   > :red_circle: 运行push命令：
+   >
+   >  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230126164750295.png" alt="image-20230126164750295" style="zoom: 90%;" />
+   >
+   > :red_circle: 运行deploy命令：进行打包，生成dist文件夹。本地仓库初始化，最后push到分支上。
+   >
+   >  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230126164900620.png" alt="image-20230126164900620" style="zoom:90%;" />
+   >
+   >  ![image-20230126165056261](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230126165056261.png)
+   >
+   >  ![image-20230126165152242](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230126165152242.png)
+
+5. 现在就可以在自己的仓库上看到有两个分支。
+
+![image-20230126165710347](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230126165710347.png)
+
+### 网址：:page_with_curl:[toxicDocs (toxic-19.github.io)](https://toxic-19.github.io/toxicDocs/)
+
+参考链接  :punch:[GitHub添加公钥](https://blog.csdn.net/fenghuibian/article/details/73350890)
+
