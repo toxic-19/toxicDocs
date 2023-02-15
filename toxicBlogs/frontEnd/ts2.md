@@ -323,7 +323,47 @@ class Cat extends Animal {
 
 ### 4.2 接口
 
-:page_with_curl: 定义一个类的结构。`interface`关键字开头。同时接口也可以当成类型声明使用。
+:page_with_curl: 定义一个类的结构。`interface`关键字开头。同时接口也可以当成类型声明使用。类型别名和接口很相似。区别如下：
+
+```tsx
+// 接口：
+interface Animal{
+    name: string
+}
+interface Bear extends Animal{   // 继承扩展Bear的类型
+    honey: bolean
+}
+const bear : Bead = {
+    name: 'whine',
+    honey: false
+}
+// 类型别名
+type Animal = {
+    name: string
+}
+type Bear = Animal & {
+    honey: boolean
+}
+const bear : Bear = {
+    name: 'whine',
+    honey: false
+}
+
+// 定义相同的接口，不同的类型。可以算是添加字段。
+interface MyWindow{
+    name: string
+}
+interface MyWindow{
+    count: number
+}
+const w: MyWindow = {
+    name: 'kal',
+    count: 4
+}
+// 定义相同的类型，会导致重复标识符报错。
+```
+
+
 
 :punch: **接口可以重复声明。不会覆盖，会添加上去。**
 

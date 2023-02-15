@@ -2,7 +2,8 @@
 title: promise
 date: 2022-12-8
 tags:
- - vue
+ - JavaScript
+ - ES6
 categories:
  - 前端
 sidebar: 'auto'

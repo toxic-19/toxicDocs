@@ -1,5 +1,5 @@
 ---
-title: 数组第二天
+title: 数组2——双指针法
 date: 2022-12-8
 tags:
  - 数组
@@ -9,9 +9,8 @@ sidebar: 'auto'
 ---
 
 
-## 数组
 
-### 1. 移除元素
+## 1. 移除元素
 
 :punch: [代码随想录移除元素链接](https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html#_27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0)
 
@@ -80,11 +79,17 @@ var removeElement = function(nums, val) {
 // 内存消耗：41.2 MB, 在所有 JavaScript 提交中击败了14.79% 的用户
 ```
 
+> ​      nums= [2,3,4,2,3]  val=3
+>
+> 1. fast=0; slow=0; nums[0]!==3 ==> nums[0] =nums [0]    **slow++**
+>
+> 2. fast=1; slow=1; nums[1]==3  ==> 不作为
+>
+> 3. fast=2; slow=1; nums[2]!==2 ==> nums[2] = nums[1]
 
+## 其他题目
 
-### 其他题目
-
-#### [【26.】删除排序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
+### [【26.】删除排序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
 
 ```js
 /**
@@ -141,7 +146,7 @@ var removeDuplicates = function (nums) {
 
 
 
-#### [【283.】移动零](https://leetcode.cn/problems/move-zeroes/)
+### [【283.】移动零](https://leetcode.cn/problems/move-zeroes/)
 
 :nerd_face: 不是0的就往前移动。剩下的补0。据说这个方法是法外之地。
 
@@ -175,7 +180,7 @@ moveZeroes([0, 1, 0, 3, 12]);
 
 
 
-#### [【844.】比较含退格的字符串](https://leetcode.cn/problems/backspace-string-compare/)
+### [【844.】比较含退格的字符串](https://leetcode.cn/problems/backspace-string-compare/)
 
 :punch: 双指针分别指向两个字符串的最后一个字符
 
@@ -237,7 +242,7 @@ console.log(backspaceCompare("bbbextm","bbb#extm"));
 
 
 
-#### [【977.】有序数组的平方](https://leetcode.cn/problems/squares-of-a-sorted-array/)
+### [【977.】有序数组的平方](https://leetcode.cn/problems/squares-of-a-sorted-array/)
 
 ```js
 // 给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。

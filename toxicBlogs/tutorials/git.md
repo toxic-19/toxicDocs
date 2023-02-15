@@ -14,7 +14,10 @@ sidebar: 'auto'
 ![git最新安装包](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/downloads.png)  
 注意：最新安装包截图来源：[【git官网下载】](https://git-scm.com/download/win) 审查元素
 
+
+
 ## 2. 使用 Git 管理项目
+
 ### 本地管理
  ![Git.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/Git.png)
 #### 1. 解决git使用commit命令后显示Author identity unknown
@@ -184,7 +187,10 @@ D:\Visual Studio Code\HBuilderProjects\uni_shop>git branch -d tabbar
 Deleted branch tabbar (was eb41feb).
 ```
 
+
+
 ## 4. home
+
 ### 创建 home 分支
 ```shell
 D:\Visual Studio Code\HBuilderProjects\uni_shop>git checkout -b home
@@ -195,13 +201,18 @@ D:\Visual Studio Code\HBuilderProjects\uni_shop>git branch
   main
 ```
 
+
+
 ## 5. git下载项目
+
 ### clone-->选择http下面的网址-->打开Git Bash
 ```shell
 $ git clone https网址
 ```
  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/download.png" alt="img_1.png" style="zoom:80%;" />
+
 ### 修改默认下载目录
+
 ```shell
 # 以下目录是我要修改到这里的目录
 $ cd D:\git_project 
@@ -300,6 +311,8 @@ $ git commit -m "description"
 ```
 
  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117013954443.png" alt="image-20230117013954443" style="zoom:80%;" />
+
+![image-20230129012648019](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230129012648019.png)
 
 
 
@@ -420,7 +433,7 @@ index 82cbe8a..f634043 100644
 
 > 添加到暂存区；再进行一次修改。
 >
->   <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117150758995.png" alt="image-20230117150758995" style="zoom:77%;" />
+>    <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117150758995.png" alt="image-20230117150758995" style="zoom:77%;" />
 >
 > **流程**：第一次修改 ==> 添加到暂存区 ==> 第二次修改 ==> 提交。最终提交的是第一次修改的内容。
 >
@@ -481,11 +494,11 @@ index 82cbe8a..f634043 100644
 
 3.  **删除文件**：已经被commit到本地仓库的文件，希望删除并使工作区和版本库状态一致。
 
-    <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117175120104.png" alt="image-20230117175120104" style="zoom:80%;" />
+     <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117175120104.png" alt="image-20230117175120104" style="zoom:80%;" />
 
 > 在文件管理器中删除。相当于在工作区中进行删除。其实也是一种修改。所以查看状态会出现删除文件的提示信息。
 >
->  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117175148224.png" alt="image-20230117175148224" style="zoom:80%;" />
+>   <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230117175148224.png" alt="image-20230117175148224" style="zoom:80%;" />
 >
 > 根据提示：
 >
@@ -689,3 +702,32 @@ $ git push origin dev
 [一篇带你用 VuePress + Github Pages 搭建博客 · Issue #235 · mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog/issues/235)
 
  ![image-20230126014306174](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230126014306174.png)
+
+### 7.2 补充
+
+参考链接 :punch:[git status 命令总结 —— Git 学习笔记 06](https://blog.csdn.net/longintchar/article/details/81611594)
+
+```sh
+# 1. git status的简洁模式
+$ git status --short
+ D learnGit/hello.html                       # 删除的文件
+ M readme.md								 # 修改的文件
+?? learnGit/--short.txt						 # 增加的文件
+?? learnGit/static/
+
+$ git status -s                              # --short的简写模式
+```
+
+参考链接 [git reset 命令详解（一）—— Git 学习笔记 07](https://blog.csdn.net/longintchar/article/details/81843048)
+
+[git创建分支，提交代码详细流程（保姆级）](https://blog.csdn.net/weixin_43367262/article/details/100575221)
+
+你需要拉取他的代码，但是因为你本地有正在开发的代码，无法git pull，那切记一定不要先git commit！ **要先 git stash ， 将你本地开发代码提交到本地暂存区（可以跨分支哦，这方式很好用），然后git pull，拉下别人的代码后，再 git stash pop，将你代码从暂存区退出到本地开发目录**，然后就是解决冲突，接着 再是git add/commit/push啦
+
+———————————————— 原文链接：https://blog.csdn.net/qq_39404437/article/details/123573786
+
+## 8. 实践出真知
+
+[git stash - 《阮一峰 Git 教程》 - 书栈网 · BookStack](https://www.bookstack.cn/read/git-tutorial/docs-commands-git-stash.md)
+
+### git stash

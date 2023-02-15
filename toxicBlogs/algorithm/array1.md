@@ -1,5 +1,5 @@
 ---
-title: 数组第一天
+title: 数组1——二分查找
 date: 2022-12-8
 tags:
  - 数组
@@ -8,10 +8,7 @@ categories:
 sidebar: 'auto'
 ---
 
-
-## 数组
-
-### 1. 二分查找
+## 1. 二分查找
 
 [1.《代码随想录二分查找链接》](https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html)  [2. leetcode题目链接：704二分查找](https://leetcode.cn/problems/binary-search/)
 
@@ -90,9 +87,9 @@ console.log(search([-1,0,3,5,9,12], 2));   // -1
 
 
 
-### 2. 相关题型
+## 2. 相关题型
 
-#### 【35】. 搜索插入位置 
+### 【35】. 搜索插入位置 
 
 [1. leetcode题目链接：35.搜索插入位置](https://leetcode.cn/problems/search-insert-position/)   ： 在二分查找索引的基础上多了一个按顺序插入的步骤。
 
@@ -155,7 +152,7 @@ console.log(searchInsert([-1,0, 3, 5, 9,12], 10));
 
  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20221217130331527.png" alt="image-20221217130331527" style="zoom: 50%;" /><img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20221217130425435.png" alt="image-20221217130425435" style="zoom: 50%;" />
 
-#### 【34】. 查找索引范围
+### 【34】. 查找索引范围
 
 [1. leetcode题目链接：34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
 
@@ -163,5 +160,6 @@ console.log(searchInsert([-1,0, 3, 5, 9,12], 10));
 
 
 
-#### [【69】. x 的平方根 ](https://leetcode.cn/problems/sqrtx/)
+### 【69】. x 的平方根
 
+[1. leetcode题目链接：](https://leetcode.cn/problems/sqrtx/)

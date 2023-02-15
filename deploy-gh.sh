@@ -3,6 +3,9 @@
 # 确保脚本抛出遇到的错误
 set -e
 
+# 文件更新：打包前把之前dist文件夹删除
+rm -rf .vuepress/dist/*
+
 # 生成静态文件
 npm run build
 

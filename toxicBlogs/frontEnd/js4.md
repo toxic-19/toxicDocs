@@ -460,9 +460,161 @@ fruits.push("Orange");  // [ 'Apple', 'Orange' ]
 
 ## 6. [Iterable object（可迭代对象）](https://zh.javascript.info/iterable)
 
+1. 可迭代对象是数组的泛化。`for...of`循环用于可迭代对象。
+
+2. 数组和字符串是使用最广泛的内建可迭代对象。
+
+   字符串：使用`for...of`遍历它的每个字符。
+
+3. Iterable【可迭代】 是实现了 Symbol.iterator方法的对象。
+
+   Array-like【类数组】是有索引和length属性的对象。
+
+4. **Array.form()** 可以接受 Iterator和Array-like，从中获取到新数组。
+
+   :bulb:  过程：检查是否是可迭代或类数组，然后创建一个新的数组，将该对象上的所有元素复制到这个新数组。
+
+   ![image-20230209144848344](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230209144848344.png)
+
+   :bulb: 完整语法：`Array.form(obj[, mapFn, thisArg])`
+
+   ```js
+   let range = {
+   	0:1,
+       1:2,
+       2:3,
+       length:3
+   }
+   // 可选的映射函数 mapFn
+   let arr = Array.form(range,num=>num*num)
+   console.log(arr)  // 1 4 9
+   ```
+
+   :bulb: 接收字符串，将它转换为单个字符的数组。
+
+   ```js
+   let str = "xiaolian";
+   let chars = Array.from(str);
+   console.log(chars);
+   // Array(8) [ "x", "i", "a", "o", "l", "i", "a", "n" ]
+   ```
+
+   
+
 ## 7. [Map and Set（映射和集合）](https://zh.javascript.info/map-set)
 
+### 7.1 Map
+
++ 形式：
+
+```js
+let map = new Map();
+
+map.set('1', 'str1');   // 字符串键
+map.set(1, 'num1');     // 数字键
+map.set(true, 'bool1'); // 布尔值键
+console.log(map)  // Map(3) { 1 → "str1", 1 → "num1", true → "bool1" }
+```
+
++ 方法和属性：
+
+  - `new Map()` —— 创建 map。
+
+  - `map.set(key, value)` —— 根据键存储值。
+
+  - `map.get(key)` —— 根据键来返回值，如果 `map` 中不存在对应的 `key`，则返回 `undefined`。
+
+  - `map.has(key)` —— 如果 `key` 存在则返回 `true`，否则返回 `false`。
+
+  - `map.delete(key)` —— 删除指定键的值。
+
+  - `map.clear()` —— 清空 map。
+
+  - `map.size` —— 返回当前元素个数。
+
++ 注意：`map[key]`不是使用`map`的正确形式。
+
++ 链式调用：每次调用都会返回map本身。
+
+  ```js
+  map.set('1', 'str1')
+     .set(1, 'num1')
+     .set(true, 'bool1');
+  ```
+
++ **Map迭代** ：在map中使用循环。
+
+  + `map.keys()` —— 遍历并返回一个<u>包含所有键</u>的可迭代对象，
+  + `map.values()` —— 遍历并返回一个<u>包含所有值</u>的可迭代对象，
+  + `map.entries()` —— 遍历并返回一个<u>包含所有实体 `[key, value]` 的可迭代对象</u>，`for..of` 在默认情况下使用的就是这个。
+
+  ![image-20230209154939617](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230209154939617.png)
+
+  ```js
+  // 遍历所有的键（vegetables）
+  for (let vegetable of recipeMap.keys()) {
+    console.log(vegetable); // cucumber, tomatoes, onion
+  }
+  
+  // 遍历所有的值（amounts）
+  for (let amount of recipeMap.values()) {
+    console.log(amount); // 500, 350, 50
+  }
+  
+  // 遍历所有的实体 [key, value]
+  for (let entry of recipeMap) { // 与 recipeMap.entries() 相同
+    console.log(entry); // cucumber,500 (and so on)
+  }
+  ```
+
++ [Object.entries(obj)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)：将普通对象转换为Map.返回键值对数组：``[ ["name","John"], ["age", 30] ]``
+
+  [Object.fromEntries：从 Map 创建对象](https://zh.javascript.info/map-set#objectfromentries-cong-map-chuang-jian-dui-xiang)：给定具有`[key,value]`键值对的数组，会创建一个对象。
+
+### 7.2 Set
+
+1. `Set` 是一个特殊的类型集合 —— “值的集合”（没有键），**它的每一个值只能出现一次。**
+   - `new Set(iterable)` —— 创建一个 `set`，如果提供了一个 `iterable` 对象（通常是数组），将会从数组里面复制值到 `set` 中。
+   - `set.add(value)` —— 添加一个值，返回 set 本身
+   - `set.delete(value)` —— 删除值，如果 `value` 在这个方法调用的时候存在则返回 `true` ，否则返回 `false`。
+   - `set.has(value)` —— 如果 `value` 在 set 中，返回 `true`，否则返回 `false`。
+   - `set.clear()` —— 清空 set。
+   - `set.size` —— 返回元素个数。
+
+```js
+let set = new Set();
+
+let john = { name: "John" };
+let pete = { name: "Pete" };
+let mary = { name: "Mary" };
+
+// visits，一些访客来访好几次
+set.add(john);
+set.add(pete);
+set.add(mary);
+set.add(john);
+set.add(mary);
+console.log(set)
+```
+
+![image-20230209183448208](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230209183448208.png)
+
+2. Set迭代：使用`for...of  forEach`进行遍历
+
+   Map中用于迭代的方法在Set中同样支持。
+
+   + `set.keys()`
+   + `set.values()`
+   + `set.entries()`
+
 ## 8. [WeakMap and WeakSet（弱映射和弱集合）](https://zh.javascript.info/weakmap-weakset)
+
+### 8.1 WeakMap
+
+:bulb: 如果使用对象作为常规Map的键，那么当Map存在时，该对象也存在。占用内存并不会被回收。
+
+1. `WeakMap` 在这方面有着根本上的不同。它不会阻止垃圾回收机制对作为键的对象（key object）的回收。
+2. WeakMap的键必须是对象不能是原始值。
 
 ## 9. [Object.keys，values，entries](https://zh.javascript.info/keys-values-entries)
 
