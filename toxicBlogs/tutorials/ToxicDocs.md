@@ -386,5 +386,12 @@ https://vuepress.vuejs.org/zh/theme/default-theme-config.html#%E4%BE%A7%E8%BE%B9
 
 ### 文件更新：
 
-脚本文件添加 删除打包文件夹的语句` rm -rf .vuepress/dist/*` ,在打包前都进行删除，这样打包完就是新的了。再推动到github上。
+脚本文件添加 删除打包文件夹的语句` rm -rf .vuepress/dist/*` ,在打包前都进行删除，这样打包完就是新的了。再推动到github上。
 
+照着脚本deploy-sh写就好了，直接执行可能报错。
+
+如果要运行脚本的话，需要在`git bash`或`git cmd`中打开，否则无法识别`sh`
+
+`Now using node v16.15.1 (64-bit) ` 
+
+`sh deploy.sh` 即可

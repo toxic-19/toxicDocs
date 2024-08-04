@@ -1,8 +1,8 @@
 ---
-title: typescript(1)
+title: typescript类型
 date: 2022-12-8
 tags:
- - ts
+ - TypeScript
 categories:
  - 前端
 sidebar: 'auto'
@@ -18,11 +18,23 @@ sidebar: 'auto'
 
 :facepunch: 属于 `javascript` 的超集；扩展了 `JavaScript` 、并添加了类型。
 
-:warning: `TS`不能被 `JS` 解析器直接执行。**需要将ts编译为js再执行**。
+:warning: `TS`不能被 `JS` 解析器直接执行。**需要将`ts`编译为`js`再执行**。
 
-  :exclamation:  `TS`包括了`ES`的全部内容，还有其他扩展内容。
+:exclamation:`TS`包括了`ES`的全部内容，还有其他扩展内容。
 
-### 1.2 typescript增加了什么？
+
+
+**TypeScript 与 JavaScript 的区别**
+
+|                   TypeScript                   |                JavaScript                |
+| :--------------------------------------------: | :--------------------------------------: |
+| JavaScript 的超集用于解决大型项目的代码复杂性  |      一种脚本语言，用于创建动态网页      |
+|          可以在编译期间发现并纠正错误          | 作为一种解释型语言，只能在运行时发现错误 |
+|           强类型，支持静态和动态类型           |         弱类型，没有静态类型选项         |
+| 最终被编译成 JavaScript 代码，使浏览器可以理解 |          可以直接在浏览器中使用          |
+|              支持模块、泛型和接口              |          不支持模块，泛型或接口          |
+
+### 1.2 `typescript`增加了什么？
 
 1. 类型
 2. 支持`ES`的新特性 
@@ -33,16 +45,21 @@ sidebar: 'auto'
 
 ### 1.3 开发准备
 
+在线TS开发地址：https://www.typescriptlang.org/play/
+
 1. 安装 `typescript`
 
 ```sh
-npm install -g typescript
+$ npm install -g typescript
+$ tsc -v
+# Version 5.3.3
 ```
 
 2. 编译命令
 
 ```sh
-tsc xxx.ts
+$ tsc xxx.ts
+# 编译ts文件使其转换为js文件，从而可以在浏览器中使用
 ```
 
 3. 所有的`js`代码都可以在`ts`中使用。
@@ -55,20 +72,21 @@ tsc xxx.ts
 
 ```ts
 // 声明并赋值
-let num : number = 123;
+let num: number = 123;
 
 let num = 123;  // 会自动检测出是number类型。
 
 // 字面量声明
-let num : 10; // num的值只能为10；类似常量
+let num: 10; // num的值只能为10；类似常量
 num = 11; // 会报错。
+
 // 字面量声明：b的值可以是male也可以是female；可以是不同类型。
-let b : "male" | "female";
+let b: "male" | "female";
 b = "male";
 b = "female";
 
 // 对函数参数进行类型限制  函数返回值类型限制
-let sum = function(a:number,b:number):number{
+let sum = function(a: number, b: number): number {
     return a + b;
 }
 ```
@@ -78,10 +96,10 @@ let sum = function(a:number,b:number):number{
 :heavy_exclamation_mark: 类型声明给变量设置了类型，使得变量只能存储某种类型的值。
 
 ```ts
-let a : number;
+let a: number;
 a = 10;          // 不报错
 a = "hello";     // 红色波浪线：let a: number
-				 // Type 'string' is not assignable to type 'number'.ts(2322)
+				 				 // Type 'string' is not assignable to type 'number'.ts(2322)
 ```
 
 **注意：有错误也会编译成功。但在编译过程中会有提示错误。没有信息就是编译成功**。针对此配置：
@@ -94,31 +112,35 @@ a = "hello";     // 红色波浪线：let a: number
 
 在类型注释前加上 ? 表明该参数是可选的。类似 `last?: string`，可以不传这个参数。
 
-|  类型   |       例子        |              描述              |
-| :-----: | :---------------: | :----------------------------: |
-| number  |    1, -33, 2.5    |            任意数字            |
-| string  | 'hi', "hi", `hi`  |           任意字符串           |
-| boolean |    true、false    |       布尔值true或false        |
-| 字面量  |      其本身       |  限制变量的值就是该字面量的值  |
-|   any   |         *         |            任意类型            |
-| unknown |         *         |         类型安全的any          |
-|  void   | 空值（undefined） |     没有值（或undefined）      |
-|  never  |      没有值       |          不能是任何值          |
-| object  |  {name:'孙悟空'}  |          任意的JS对象          |
-|  array  |      [1,2,3]      |           任意JS数组           |
-|  tuple  |       [4,5]       | 元素，TS新增类型，固定长度数组 |
-|  enum   |    enum{A, B}     |       枚举，TS中新增类型       |
+|   类型    |            例子             |              描述              |
+| :-------: | :-------------------------: | :----------------------------: |
+|  number   |         1, -33, 2.5         |            任意数字            |
+|  string   | 'hi', "hi",  模板字符串`hi` |           任意字符串           |
+|  boolean  |         true、false         |       布尔值true或false        |
+|  字面量   |           其本身            |  限制变量的值就是该字面量的值  |
+|    any    |              *              |            任意类型            |
+|  unknown  |              *              |         类型安全的any          |
+|   void    |      空值（undefined）      |     没有值（或undefined）      |
+|   never   |           没有值            |          不能是任何值          |
+|  object   |     { name: '孙悟空' }      |          任意的JS对象          |
+|   array   |           [1,2,3]           |           任意JS数组           |
+| **tuple** |            [4,5]            | 元素，TS新增类型，固定长度数组 |
+| **enum**  |        enum { A, B }        |       枚举，TS中新增类型       |
 #### 2.2.1 字面量
 
 ```ts
-let num = 10;  // 限制num为number类型，且赋值为10
-let num : 10;  // 限制num为10;不可以赋值给其他的。
-let sex : "male" | "female"; // 限制sex为female或者male；不可以赋值给其他的。
+let num = 10;  // 限制num为number类型，且赋值为10。还可以再另外赋值。
+
+let num: 10;  // 限制num为10;不可以赋值给其他的。类似与常量const
+
+let sex: "male" | "female"; // 限制sex为female或者male；不可以赋值给其他的。
 ```
 
 #### 2.2.2 `any`
 
-对一个变量赋值any类型的时候，意味着可以对它进行任何操作，分配给任何值，几乎在语法上都是合法的。但any不进行任何的类型检查
+对一个变量赋值 any 类型的时候，意味着可以对它进行任何操作，分配给任何值，几乎在语法上都是合法的。
+
+但any不进行任何的类型检查。
 
 ```ts
 // any表示的是任意类型；一个变量设置类型为any后相当于对该变量关闭了 TS 的类型检测
@@ -139,16 +161,19 @@ str = num; // any类型可以赋值给任意变量；这样str就变成了any类
 
 #### 2.2.3 `unknown`
 
-**实际上是一个类型安全的any**
+unknown 成为 TypeScript 类型系统的另一种顶级类型（另一种是 `any`)
+
+**实际上是一个类型安全的 any。**
 
 ```ts
 // unknown 表示的是未知类型的值
-let num : unknown;
+let num: unknown;
 num = 10;
 num = true;
 num = "hello";
 // 都不报错；和上面的any类型效果一致。但是unknown类型不可以赋值给其他变量
-let str : string;
+
+let str: string;
 str = num; // 报错;因为num是unknown类型
 // 报错内容：不能将类型“unknown”分配给类型“string”。
 ```
@@ -156,9 +181,10 @@ str = num; // 报错;因为num是unknown类型
 **类型断言**：两种语法形式。
 
 ```ts
-let num : unknown;
+let num: unknown;
 num = "hello";
-let str : string;
+let str: string;
+
 // 类型断言
 str = num as string;  // 告诉解析器 num是string类型
 str = <string>num;
@@ -261,38 +287,82 @@ let array : Array<number> = [1,2];
 
 #### 2.2.7 新增类型：元组 `tuple`
 
+**众所周知，数组一般由同种类型的值组成，但有时我们需要在单个变量中存储不同类型的值，这时候我们就可以使用元组**。
+
 元组：固定长度的数组。【限制长度，限制类型】
 
 ```ts
 // 声明为长度为2的数组；且一个是string类型，一个是number类型。
-let tuple = [string,number];
-tuple = ["hello",123];
+let tuple = [string, number];
+tuple = ["hello", 123];
 ```
 
 
 
 #### 2.2.8 新增类型：枚举 `enum`
 
+1. 数字的枚举
+
 ```ts
-// 定义一个枚举
+// 定义一个枚举，编译为JS文件后从初始值开始自动递增分配给各变量
 enum Gender{
-    Male,
+    Male, // 还可以定义默认值 否则就是从0开始
     Female
 }
-let person = {gender: Gender; name: string};
-person = {
-    name:"孙悟空",
-    gender:Gender.Male
+let person = {
+    name: "孙悟空",
+    gender: Gender.Male
 }
-console.log(person.gender === Gender.Male)
 ```
 
- <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20221221113043121.png" alt="image-20221221113043121" style="zoom:67%;" />
+![image-20240130225630213](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202401302256582.png)
+
+```typescript
+let dirName = Direction[0]      // NORTH
+let dirVal = Direction["NORTH"] // 0
+```
+
+
+
+2. 字符串的枚举
+
+```typescript
+enum Direction {
+  NORTH = "NORTH",
+  SOUTH = "SOUTH",
+  EAST = "EAST",
+  WEST = "WEST"
+}
+```
+
+3. 常量枚举
+
+> 使用 `const` 关键字修饰的枚举，常量枚举会使用内联语法，不会为枚举类型编译生成任何 JavaScript。
+
+![image-20240130230714159](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202401302307316.png)
+
+4. 异构枚举
+
+```typescript
+enum Enum {
+  A, 					// 1
+  B,          // 2
+  C = "C",    // "C"
+  D = "D",    // "D"
+  E = 8,      // 8
+  F           // 9
+}
+console.log(Enum.A) // 0
+console.log(Enum.C) // "C"
+console.log(Enum[1]) // "B" 
+```
+
+
 
 #### 2.2.9 类型别名
 
 ```ts
-// 类型别名;如果这个类型重复被使用。可以简化类型的使用。
+// 类型别名: 如果这个类型重复被使用。可以简化类型的使用。
 type MyType = 1 | 3 | 5;
 let num1 : MyType;
 num1 = 1;
@@ -307,6 +377,50 @@ let id : number | string
 ```
 
 需要进行判断 id 的类型，不能随意进行逻辑运算。除非是这些类型都有的方法或属性。
+
+#### 2.2.11 Never 类型
+
+`never` 类型表示的是那些永不存在的值的类型。
+
+ 例如，`never` 类型是那些总是会抛出异常或根本就不会有返回值的函数表达式或箭头函数表达式的返回值类型。
+
+### 2.3 断言
+
+**类型断言语法：**
+
+1. 尖括号语法
+2. `as `语法
+
+```typescript
+let someValue: any = "this is a string";
+let strLength: number = (someValue as string).length;
+```
+
+
+
+**非空断言语法：**
+
+一个新的后缀表达式操作符 `!` 可以用于断言操作对象是非 null 和非 undefined 类型。
+
+**具体而言，`x!` 将从 x 值域中排除 null 和 undefined 。**
+
+
+
+**确定赋值断言：**
+
+```typescript
+let x!: number; // 告诉 TypeScript 该属性会被明确地赋值
+initialize();
+console.log(2 * x); // OK 否则 Variable 'x' is used before being assigned.(2454)
+
+function initialize() {
+  x = 10;
+}
+```
+
+
+
+
 
 ## 3. 编译
 
@@ -487,9 +601,9 @@ module.exports = {
 
 
 
-#### 3.3.2 `webpack`配置完善
+#### 3.3.2 `webpack`配置完善 
 
- :facepunch:**需求1 ：**每次查看打包的js效果，需要引入到html文件中，很麻烦。
+:facepunch: **需求1 ：**每次查看打包的js效果，需要引入到html文件中，很麻烦。
 
 :page_with_curl: **解决1：** 下载`html-webpack-plugin`依赖；作用：自动生成html文件
 
@@ -586,7 +700,7 @@ resolve: {
 },
 ```
 
-![image-20221222001642621](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20221222001642621.png)
+ ![image-20221222001642621](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20221222001642621.png)
 
 
 

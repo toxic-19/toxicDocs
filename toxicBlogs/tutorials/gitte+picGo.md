@@ -10,8 +10,6 @@ sidebar: 'auto'
 
 
 
-
-
 ## 1. 下载picGo(command)
 
 [PicGo (molunerfinn.com)](https://molunerfinn.com/PicGo/)
@@ -43,3 +41,5 @@ sidebar: 'auto'
 如果使用 [Hexo](https://links.jianshu.com/go?to=https%3A%2F%2Fhexo.io%2Fzh-cn%2F) 来搭建本地博客，可以不安装 iPic、PicGo 等图床插件，通过 Typora 将图片保存在本地，基于 [hexo-deployer-cos-cdn](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fhexo-deployer-cos-cdn) 插件一键自动部署，详情可参考博文：[hexo-deployer-cos-cdn 插件安装使用指南](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.lixl.cn%2F2020%2F020936412.html)。
 
 ![img](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/img.png)
+
+<img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230126130403.jpg" alt="微信图片_20230126130403" style="zoom:50%;" />

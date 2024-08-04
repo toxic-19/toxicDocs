@@ -1,5 +1,5 @@
 ---
-title: vue生命周期
+title: 03. vue2生命周期
 date: 2022-12-8
 tags:
  - vue
@@ -38,7 +38,7 @@ sidebar: 'auto'
         mounted(){
           console.log('mounted')
           setInterval(()=>{
-            //    每16毫秒就执行一次该箭头函数
+            // 每16毫秒就执行一次该箭头函数
             this.opacity -= 0.06
             if(this.opacity<=0) {this.opacity = 1}
           },16)
@@ -76,10 +76,12 @@ mounted(){
 
 ### 1.3 图例
 
-<img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1665549497017-357aca75-a001-47c0-8643-b1f82cbbcb99.png?x-oss-process=image%2Fresize%2Cw_937%2Climit_0" alt="生命周期.png" style="zoom:87%;" />
+ <img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1665549497017-357aca75-a001-47c0-8643-b1f82cbbcb99.png?x-oss-process=image%2Fresize%2Cw_937%2Climit_0" alt="生命周期.png" style="zoom:100%;" />
 
 ## 2. 图解
+
 ### 2.1 beforeCreate
+
 ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665552929706-e1885c97-1fbd-4c74-9cb6-fcf7896b7b34.png)
 ```javascript
 beforeCreate(){
@@ -110,7 +112,7 @@ created(){
 ```
  <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665553901816-812361c1-595b-40e9-b5f8-d88871e0e56c.png" alt="image.png" style="zoom:67%;" />
 
->    <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665554145491-edadb6db-b2ab-40de-bbf5-6bd666832ede.png" alt="image.png" style="zoom:50%;" />
+>     <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665554145491-edadb6db-b2ab-40de-bbf5-6bd666832ede.png" alt="image.png" style="zoom:50%;" />
 >
 >  **在created生命周期函数中 模板也没有开始编译，但已经完成数据监测与数据代理**
 
@@ -235,11 +237,11 @@ updated(){
 1. 点击销毁之后 触发this.$destroy()函数：完全销毁一个实例，清理与其他实例的连接，解绑全部指令和自定义事件监听器。
 2. 所以在点击销毁之后 ：监测工具VueTool监测不到data了。点击事件add也无法更改页面上的值了。
 
-     ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665559820439-36f41d99-ae34-4c8e-8999-f6eba68149c5.png)
+      ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665559820439-36f41d99-ae34-4c8e-8999-f6eba68149c5.png)
 
 3. 但是：触发点击事件add仍在执行：销毁之后还留有原生事件回调函数。
 
-      ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665559941421-61ba2873-0264-4e37-87bd-37ee8e4b7955.png)
+       ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665559941421-61ba2873-0264-4e37-87bd-37ee8e4b7955.png)
 ```javascript
 methods:{
     add(){

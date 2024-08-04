@@ -3,11 +3,9 @@ title: 正则表达式(2)
 date: 2022-2-5
 tags:
  - 正则表达式
- - JavaScript
 categories:
  - 前端
 sidebar: 'auto'
-
 ---
 
  参考链接：:punch:[JS正则表达式完整教程（略长）](https://juejin.cn/post/6844903487155732494#heading-1)
@@ -57,7 +55,7 @@ console.log(strings.match(regex)) // [ 'a1bc', 'a2bc', 'a3bc' ]
 8. 匹配任何字符 [\d\D] [\w\W] [\s\S] [^]
 ```
 
-:ear: 4. **量词**
+:ear: 4. **量词**
 
 ```tsx
 1. {m,} : x >= m

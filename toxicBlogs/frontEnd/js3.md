@@ -1,5 +1,18 @@
+---
+title: 对象的基础知识
+date: 2022-12-8
+tags:
+ - JavaScript
+categories:
+ - 前端
+sidebar: 'auto'
+---
+
 **（1）本笔记阅读目录：**
-![图片.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1667454409726-da7cefe1-5f96-470c-881a-909997af6b20.png#averageHue=%23fefefd&clientId=u8bce0882-d79a-4&from=paste&height=121&id=u8031b5e7&name=%E5%9B%BE%E7%89%87.png&originHeight=151&originWidth=1081&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21468&status=done&style=none&taskId=uae9eb26e-b8cf-4d93-931a-ca483139554&title=&width=864.8)**（2）参考链接：**
+![图片.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1667454409726-da7cefe1-5f96-470c-881a-909997af6b20.png#averageHue=%23fefefd&clientId=u8bce0882-d79a-4&from=paste&height=121&id=u8031b5e7&name=%E5%9B%BE%E7%89%87.png&originHeight=151&originWidth=1081&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21468&status=done&style=none&taskId=uae9eb26e-b8cf-4d93-931a-ca483139554&title=&width=864.8)
+
+**（2)参考链接：**
+
 ## 1.  第一列：
 ### 1.1 对象
 

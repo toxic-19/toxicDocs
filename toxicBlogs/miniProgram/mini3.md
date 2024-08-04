@@ -2,7 +2,8 @@
 title: 4. 自定义组件
 date: 2022-12-8
 tags:
- - 原生小程序
+ - 原生
+ - 小程序
 categories:
  - 小程序
 sidebar: 'auto'

@@ -1,14 +1,10 @@
 ---
-title: html面试(1)
-date: 2022-12-8
-tags:
- - interview
+title: html5
+date: 2023-03-15
 categories:
- - 前端
+ - 面试
 sidebar: 'auto'
 ---
-
-
 
 ## 1. H5的新特性有哪些?
 
@@ -104,9 +100,94 @@ sidebar: 'auto'
 
 [Canvas - Web API 接口参考 | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API)
 
+注意：`<canvas>`标签只是一个图形容器，必须使用脚本绘制图形。
+
+脚本步骤：
+
+1. 找到 `<canvas>`元素
+2. 创建`context`对象，使用内置 `Html5` 对象
+3. 绘制图形；使用`fillStyle`或者`fillRect`方法来定义
+
+```js
+let canvas = document.getElementById("canvas");
+let context = canvas.getContext("2d");
+// 绘制长方形
+context.fillStyle = "#000";
+context.fillRect(0,0,200,100); // 定义矩形填充方式(x,y,width,height)
+
+// 绘制路径
+context.moveTo(0,0);      // 起点
+context.lineTo(200,100);  // 终点
+context.stroke();         // 连线
+
+// 绘制圆形
+context.beginPath();
+context.arc(40,40,40,0,2*Math.PI);
+context.stroke();
+
+// 绘制文本
+context.font = "20px Arial";
+context.fillText("hello world",10,50) // left and top  实心字体
+or context.strokeText("hello world",10,50) // 空心字体
+
+// 渐变：线条渐变；径向渐变
+let gradient = context.createLinearGradient(0,0,200,0);
+gradient.addColorStop(0,"red");
+gradient.addColorStop(1,"white");   // 创建渐变
+context.fillStyle = gradient;
+context.fillRect(10,10,150,80)      // 填充渐变
+```
+
+> 绘制圆形中：
+>
+> 1. `arc(x,y,r,start,stop)` 如果`x, y`都为0，那么就会在左上角出现四分之一圆。是指以`x,y`为圆心，以`r`为半径，从`startAngle`开始直到`stopAngle`结束。
+>
+>     ![image-20230315142412558](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230315142412558.png)
+>
+> 绘制文本中：
+>
+> 1. 实心与空心文本：
+>
+>    ![image-20230315143719659](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230315143719659.png)![image-20230315143738908](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230315143738908.png)
+
+ 
+
 #### 1.3.2 地理API
 
 #### 1.3.3 拖放API
+
+拖放是一种常见的特性，即抓取对象以后拖到另一个位置。
+
+在 HTML5 中，拖放是标准的一部分，任何元素都能够拖放。
+
+步骤
+
+1. 设置元素为可拖放 `draggable:true`
+2. 设置拖动的元素 绑定`onDragstart`事件中设置 `setData()`
+
+3. 设置放置的数据 绑定`onDragover` 事件中设置阻止对元素的默认处理方式。调用`event.preventDefault()`
+4. 进行放置 绑定`ondrop` 阻止默认处理；获取到被拖动的数据；追加元素。
+
+```js
+function drag(event){
+    event.dataTransfer.setData("Text",event.target.id);
+}
+function allowDrap(event){
+    event.preventDefault();
+}
+function drop(event){
+    event.preventDefault();
+    let data = event.dataTransfer.getData("Text");
+    event.target.appendChild(document.getElementById(data));
+}
+```
+
+```html
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<img id="drag1" src="/images/logo.png" draggable="true" ondragstart="drag(event)" width="336" height="69">
+```
+
+
 
 ### 1.4 本地存储方式
 
@@ -247,29 +328,60 @@ field.addEventListener("change", function () {
 
 
 
-## 3.
+## 3. H5应该有：
 
-### 3.1
+1. `Api`
 
-### 3.2
+   ```
+   1. Canvas api
+   2. Geolocation api
+   3. Drag and Drop api
+   4. audio api
+   5, video api
+   ```
 
-### 3.3
+2. 语义标签
+
+   ```html
+   <header></header>
+   <nav></nav>
+   <footer></footer>
+   <aside></aside>
+   <article></article>
+   <section></section>
+   ```
+
+3. 存储
+
+   ```
+   1. localStorage
+   2. sessionStorage
+   ```
+
+4. 新增表单控件
+
+   ```
+   calendar date time email url search
+   input标签新增属性：placeholder、autocomplete、autofocus、required
+   ```
+
+5. 新技术
+
+   ```
+   1. webworker
+   2. websocket
+   3. GeoLocation
+   ```
 
 
+6. history API：go、forward、back、pushstate
 
-## 4.
+## 4. H5新鲜知识点
 
-### 4.1
+1. `DocType` 新的文档类型声明；`<meta charset="UTF-8">` 记得中文要加上声明编码，不然会乱码。
+2. `html`本地存储：优于`cookies`；本地存储更加安全，并且可在不影响网站性能的前提下将大量数据存储于本地。存储限制要大的多，至少5MB，并且信息不回被传输到服务器。
+3. `html`本地存储：`LocalStorage`和`sessionStorage`；都是存在`window`下的`api`。
+4. 区别：`localStorage `对象存储的是没有截止日期的数据。当浏览器被关闭时数据不会被删除，在下一天、周或年中，都是可用的。但是`sessionStorage `在用户关闭具体的浏览器标签页时，数据也会被删除。
+5. 应用程序缓存：对web应用进行缓存，可以在无网络链接时进行访问。启动应用缓存，需在`<html>`标签中包含`mainfest`属性。
+6. `svg`指可伸缩矢量图形，使用`XML`格式，放大或改变尺寸的情况下图形质量不会有损失。`svg`是www联盟的标准。
 
-### 4.2
-
-### 4.3
-
-
-## 5.
-
-### 5.1
-
-### 5.2
-
-### 5.3

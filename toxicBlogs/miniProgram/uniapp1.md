@@ -2,7 +2,8 @@
 title: uniapp示例项目-青年帮新闻
 date: 2023-1-12
 tags:
- - uniapp框架
+ - uniapp
+ - 小程序
 categories:
  - 小程序
 sidebar: 'auto'
@@ -44,7 +45,7 @@ sidebar: 'auto'
 ​      **v-show在微信小程序中有问题； H5表现正常， 微信小程序v-show失效；**
 据说在封装组件中使用v-show，会导致不生效。但是我在 youngGang小程序中是在基础组件上使用的，同样不生效。**原因未知**。修改为`v-if` 即可。
 
-:punch: [uni-app v-show不生效，是不是有什么特别的用法？还是说不能用到自定义组件上？ - DCloud问答](https://ask.dcloud.net.cn/question/75176)
+:punch: [uni-app v-show不生效，是不是有什么特别的用法？还是说不能用到自定义组件上？ - DCloud问答](https://ask.dcloud.net.cn/question/75176)
 
 其他方案：不知道能不能行，仅做记录
 

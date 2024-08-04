@@ -1,8 +1,8 @@
 ---
-title: typescript项目(3)
+title: typescript项目
 date: 2022-12-8
 tags:
- - ts
+ - TypeScript
 categories:
  - 前端
 sidebar: 'auto'
@@ -239,9 +239,19 @@ module.exports = {
 
 
 
-## 2. 
+## 2. 实用类型
 
-### 2.1
+1. 定义组件实例：
+
+```typescript
+import CreateProjectDialog from '@/views/project/components/createProjectDialog.vue'
+const createProjectRef = ref<InstanceType<typeof CreateProjectDialog>>()
+const create = () => {
+  createProjectRef.value?.showModal(true)
+}
+```
+
+### 2.1 
 
 ### 2.2
 

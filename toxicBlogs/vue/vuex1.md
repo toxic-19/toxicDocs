@@ -1,5 +1,5 @@
 ---
-title: Vuex
+title: 04. VueX
 date: 2022-12-8
 tags:
  - vue
@@ -457,7 +457,7 @@ changeViewKey(state,key){
   state.viewKey = key
 }
 ```
- ![image-20221206235427078](C:/Users/%E7%9F%A5%E8%91%97/AppData/Roaming/Typora/typora-user-images/image-20221206235427078.png)
+ ![image-20221206235427078](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20221206235427079.png)
 > 4. 使用三元运算符 ： 若当前是 符合该属性 就为高亮 不符合就不高亮
 > 
   动态绑定type  :type="viewKey==='all'?'primary':'default'"：viewKey值为all 就高亮

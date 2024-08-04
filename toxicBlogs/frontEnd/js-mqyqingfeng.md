@@ -51,6 +51,8 @@ Object.prototype就指向null了。红色线的就是原型链。函数的protot
 
 所以 Object.prototype.__proto__ 的值为 null 跟 Object.prototype 没有原型，其实表达了一个意思。所以查找属性的时候查到 Object.prototype 就可以停止查找了。
 
+**每个对象上都有一个属性叫`__proto__`** **这个属性的值是一个对象**
+
 ## 2. 作用域
 
 :bulb: 核心就是: **函数的作用域在函数定义的时候就决定了**
@@ -74,9 +76,9 @@ bar();
 
 我认为的答案是2，但实际上是1。因为JavaScript采用的是静态作用域。
 
-分析：执行 `bar` 函数里的 `foo` 函数，是输出value值，那么我们从foo函数内部的变量查找是否有value值，如果没有，就根据书写的位置，查找上面一层的代码，也就是 value 等于 1，所以结果会打印 1。这就是静态作用域。
+分析：执行 `bar` 函数里的 `foo` 函数，是输出value值，那么我们从foo函数内部的变量查找是否有value值，如果没有，就根据书写的位置，查找上面一层的代码，也就是 value 等于 1，所以结果会打印 1。这就是静态作用域。
 
-:bulb: 而引用《JavaScript权威指南》的回答就是：JavaScript 函数的执行用到了**作用域链**，**这个作用域链是在函数定义的时候创建的**。
+:bulb: 而引用《JavaScript权威指南》的回答就是：JavaScript 函数的执行用到了**作用域链**，**这个作用域链是在函数定义的时候创建的**。
 
 ## 3. 执行上下文
 
@@ -96,7 +98,7 @@ functuon foo(){
 
 :bulb:  JavaScript 引擎创建了执行上下文栈（Execution context stack，ECS）来管理执行上下文，程序结束之前ECStack 最底部永远有个 globalContext。
 
-:bulb: **对于每个执行上下文，都有三个重要属性：**
+:bulb: **对于每个执行上下文，都有三个重要属性：**
 
 - **变量对象(Variable object，VO)**
 - **作用域链(Scope chain)**
@@ -106,7 +108,7 @@ functuon foo(){
 
 1. 可以通过 this 引用，在客户端 JavaScript 中，全局对象就是 Window 对象。
 
- ![image-20230209121441130](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230209121441130.png)
+ ![image-20230209121441130](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230209121441130.png)
 
 2. 全局上下文中的变量对象就是全局对象
 

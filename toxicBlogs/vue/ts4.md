@@ -2,10 +2,12 @@
 title: 发布订阅者模式
 date: 2022-12-8
 tags:
- - ts
+ - TypeScript
+ - JavaScript
 categories:
  - 前端
 sidebar: 'auto'
+sticky: 1
 ---
 
 ## 1. 发布订阅与观察者模式
@@ -110,15 +112,15 @@ user3.publish();
 ### 1.3 图解：
 
 #### 1.3.1 观察者
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1671522398020-52964be4-92f2-48ec-a1e3-a3e98fd06473.png#averageHue=%23f7f7f7&clientId=uc3e17c7f-ea58-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=303&id=ub1300e45&margin=%5Bobject%20Object%5D&name=image.png&originHeight=379&originWidth=938&originalType=binary&ratio=1&rotation=0&showTitle=false&size=70921&status=done&style=none&taskId=u619aa2f5-6a90-4793-a490-08ca33bb72b&title=&width=750.4)
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1671522415691-8cc316aa-3d92-49e0-9fea-526a767b1f14.png#averageHue=%23f6f6f6&clientId=uc3e17c7f-ea58-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=379&id=ub4e7bced&margin=%5Bobject%20Object%5D&name=image.png&originHeight=474&originWidth=647&originalType=binary&ratio=1&rotation=0&showTitle=false&size=67357&status=done&style=none&taskId=uc07fb2b9-b336-4acf-ab86-0dd95530d68&title=&width=517.6)
+<img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1671522398020-52964be4-92f2-48ec-a1e3-a3e98fd06473.png#averageHue=%23f7f7f7&clientId=uc3e17c7f-ea58-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=303&id=ub1300e45&margin=%5Bobject%20Object%5D&name=image.png&originHeight=379&originWidth=938&originalType=binary&ratio=1&rotation=0&showTitle=false&size=70921&status=done&style=none&taskId=u619aa2f5-6a90-4793-a490-08ca33bb72b&title=&width=750.4" alt="image.png" style="zoom: 67%;" />
+<img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1671522415691-8cc316aa-3d92-49e0-9fea-526a767b1f14.png#averageHue=%23f6f6f6&clientId=uc3e17c7f-ea58-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=379&id=ub4e7bced&margin=%5Bobject%20Object%5D&name=image.png&originHeight=474&originWidth=647&originalType=binary&ratio=1&rotation=0&showTitle=false&size=67357&status=done&style=none&taskId=uc07fb2b9-b336-4acf-ab86-0dd95530d68&title=&width=517.6" alt="image.png" style="zoom:60%;" />
 
 
 
 #### 1.3.2 发布订阅
 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1671523212364-5abbbe6a-9b25-49f5-9a50-b49d266f2618.png#averageHue=%23f9f9f9&clientId=uc3e17c7f-ea58-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=498&id=ufef60015&margin=%5Bobject%20Object%5D&name=image.png&originHeight=622&originWidth=928&originalType=binary&ratio=1&rotation=0&showTitle=false&size=117265&status=done&style=none&taskId=ud1c1b09c-ce9f-41ac-a248-6e288a1eff1&title=&width=742.4)
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1671524212113-fb35c9f0-3fb9-4c42-b1fa-9505c9a9d1ad.png#averageHue=%23f8f8f8&clientId=uc3e17c7f-ea58-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=523&id=u883d2a07&margin=%5Bobject%20Object%5D&name=image.png&originHeight=654&originWidth=1063&originalType=binary&ratio=1&rotation=0&showTitle=false&size=188298&status=done&style=none&taskId=u53a1cbe4-b1d8-49bc-ada9-a1b714f074c&title=&width=850.4)
+<img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1671523212364-5abbbe6a-9b25-49f5-9a50-b49d266f2618.png#averageHue=%23f9f9f9&clientId=uc3e17c7f-ea58-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=498&id=ufef60015&margin=%5Bobject%20Object%5D&name=image.png&originHeight=622&originWidth=928&originalType=binary&ratio=1&rotation=0&showTitle=false&size=117265&status=done&style=none&taskId=ud1c1b09c-ce9f-41ac-a248-6e288a1eff1&title=&width=742.4" alt="image.png" style="zoom:57%;" />
+<img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1671524212113-fb35c9f0-3fb9-4c42-b1fa-9505c9a9d1ad.png#averageHue=%23f8f8f8&clientId=uc3e17c7f-ea58-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=523&id=u883d2a07&margin=%5Bobject%20Object%5D&name=image.png&originHeight=654&originWidth=1063&originalType=binary&ratio=1&rotation=0&showTitle=false&size=188298&status=done&style=none&taskId=u53a1cbe4-b1d8-49bc-ada9-a1b714f074c&title=&width=850.4" alt="image.png" style="zoom:57%;" />
 
 
 

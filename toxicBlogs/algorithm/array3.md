@@ -1,8 +1,8 @@
 ---
-title: 数组3——滑动窗口
+title: 数组3 —— 滑动窗口
 date: 2022-12-8
 tags:
- - 数组
+ - 数据结构
 categories:
  - 算法
 sidebar: 'auto'

@@ -2,7 +2,6 @@
 title: promise
 date: 2022-12-8
 tags:
- - JavaScript
  - ES6
 categories:
  - 前端
@@ -12,75 +11,89 @@ sidebar: 'auto'
 
 ## 1.  基本使用
 
-可参考我的公众号链接[vue3铺垫知识](https://mp.weixin.qq.com/s/t3iMEBZGHvjolIPDxbwljw)<br />参考尚硅谷笔记<br />[尚硅谷_Promise从入门到自定义.pdf](https://www.yuque.com/attachments/yuque/0/2022/pdf/32615238/1665800837971-0b87ec7b-a18c-493c-98a1-646e16860264.pdf)<br />参考mdn 
+可参考我的公众号链接[vue3铺垫知识](https://mp.weixin.qq.com/s/t3iMEBZGHvjolIPDxbwljw)<br />参考尚硅谷笔记<br />[尚硅谷_Promise从入门到自定义.pdf](https://www.yuque.com/attachments/yuque/0/2022/pdf/32615238/1665800837971-0b87ec7b-a18c-493c-98a1-646e16860264.pdf)<br />参考 [Promise | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 ### 1.1 概念
+
 1. Promise 是一门新的技术(ES6 规范) 
 2. Promise 是 JS 中进行异步编程的**新解决方案**
-:::
-:::success
 
 1. 从语法上来说: Promise 是一个构造函数 
 4. 从功能上来说: promise 对象用来封装一个异步操作并可以获取其成功/失败的结果值
    
 
-
-
 ### 1.2 理解
 
-1.  异步编程包括？
-1. fs文件操作：
+1.  异步编程包括：
+
++ `fs`文件操作：
+
 ```javascript
-require('fs').readFile('./index.html',(err,data)=>{})
+require('fs').readFile('./index.html',(err, data) => {})
 ```
 
-2. 数据库操作
-3. AJAX异步请求
++ 数据库操作
+
++ `AJAX`异步请求
+
 ```javascript
-$.get('/server',(data)=>{})
+$.get('/server',(data) => {})
 ```
 
-4. 定时器
++ 定时器
+
 ```javascript
-setTimeout(()=>{},2000)
+setTimeout(() => {},2000)
 ```
-**无一例外都使用的是回调函数来进行异步编程**
-2. promise构造函数
-1. promise是一个构造函数，在实例化时要接收一个参数（是一个函数，有两个形参）
-2. 该形参都是函数类型的数据。
-then
-1. 由promise函数进行调用。传参两个函数：
-2. 第一个是成功时执行的回调函数,，可传value；相反第二个就是失败时执行的回调函数，可传reason。
+**无一例外都使用的是回调函数来进行异步编程**。
 
+2. `promise`构造函数
 
+​	`promise`是一个构造函数，在实例化时要接收一个参数（是一个函数，有两个形参）
+
+​	该形参都是函数类型的数据。`new Promise((resolve, reject) => { ...code })`
+
+3. `then`
+
+​	由`promise`函数进行调用。传参两个函数：`.then((value, err) => { ...code } )`
+
+​	第一个是成功时执行的回调函数,，可传`value`；相反第二个就是失败时执行的回调函数，可传`reason`。
 
 #### 抽奖案例：
 
 ```javascript
-handleClick(){
-    //Math.ceil向上取整  Math.random:0-1 不包括1
-    //Math.random:0-100 不包括100   +1 即为1-100包括100不包括101
-    let num = Math.ceil(Math.random()*100)+1;
-    console.log(num);
-    let p = new Promise((resolve,reject)=>{
-        // 书写逻辑
-        if(num<=30){
-            // 成功：执行resolve函数
-            resolve(n);    // 将promise对象的状态设置为 成功
-        }else{
-            // 失败：执行reject函数
-            reject(n);     // 将promise对象的状态设置为 失败
-        }
-    });
-    // p是promise实例
-    p.then((value)=>{
-        // 成功时回调
-        alert('恭喜你,幸运数字为'+value)
-    },(reason)=>{
-        //失败时回调
-        alert('再接再厉'+reason)
-    })
-}
+const handleClick = () => {
+  // Math.ceil向上取整  Math.random范围: [0,1)
+  // Math.random: [0, 100)   +1 即为1-100包括100不包括101  [1, 100]
+  
+  let num = Math.ceil(Math.random() * 100) + 1;
+  console.log(num);
+  
+  let p = new Promise((resolve, reject) => {
+    // 书写逻辑
+    if (num <= 30) {
+      // 成功：执行resolve函数
+      resolve(num); // 将promise对象的状态设置为 成功
+    } else {
+      // 失败：执行reject函数
+      reject(num); // 将promise对象的状态设置为 失败
+    }
+  });
+    
+  // p是promise实例
+  p.then(
+    (value) => {
+      // 成功时回调
+      console.log("恭喜你,幸运数字为" + value);
+    },
+    (reason) => {
+      //失败时回调
+      console.log("再接再厉" + reason);
+    }
+  );
+   
+};
+handleClick();
 ```
 
 
@@ -115,17 +128,9 @@ new Promise((resolve, reject) => {
 })
 ```
 
----
-
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1665811800403-b3c8ac82-dff0-44e5-a85c-461857033938.png#clientId=u71caf36a-72a0-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=143&id=u8d9be317&margin=%5Bobject%20Object%5D&name=image.png&originHeight=399&originWidth=861&originalType=binary&ratio=1&rotation=0&showTitle=true&size=42571&status=error&style=stroke&taskId=u15544d5d-6927-4f6c-b10e-5c76e09355b&title=%E6%88%90%E5%8A%9F%E6%97%B6%E8%BE%93%E5%87%BA&width=308.8000183105469 "成功时输出")  ![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1665812232818-545fb9ce-bd42-4a1e-9f5e-870ac4ec8ae0.png#clientId=u71caf36a-72a0-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=133&id=u6f5c70e7&margin=%5Bobject%20Object%5D&name=image.png&originHeight=309&originWidth=977&originalType=binary&ratio=1&rotation=0&showTitle=true&size=45169&status=error&style=stroke&taskId=ue789cb67-6843-467a-88d8-722262fe84f&title=%E5%A4%B1%E8%B4%A5%E6%97%B6%E8%BE%93%E5%87%BA&width=422 "失败时输出")
-
----
-
-
+ <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665811800403-b3c8ac82-dff0-44e5-a85c-461857033938.png" alt="image.png" style="zoom: 80%;" />
 
 #### 1.3.2 ajax请求
-
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1665813752968-ba764bcf-9f31-4b66-b484-9aa6351f2748.png#clientId=u71caf36a-72a0-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=66&id=u3992d238&margin=%5Bobject%20Object%5D&name=image.png&originHeight=83&originWidth=1292&originalType=binary&ratio=1&rotation=0&showTitle=false&size=9049&status=error&style=stroke&taskId=uafb7245f-7cc5-4dd2-a9f3-8a7c4db0716&title=&width=1033.6)<br />解决方法：
 
 ```javascript
 // 使用回调函数
@@ -150,60 +155,56 @@ handleClick(){
 }
 //  使用promise
 handleClick() {
-        new Promise((resolve,reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET",'https://api.apiopen.top/api/sentences');
-            xhr.send();
-            xhr.onreadystatechange = function (){
-                if(xhr.readyState === 4){
-                    if(xhr.status>=200&&xhr.status<300){
-                        resolve(xhr.response)
-                    }else{
-                        reject(xhr.status)
-                    }
+    new Promise((resolve,reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET",'https://api.apiopen.top/api/sentences');
+        xhr.send();
+        xhr.onreadystatechange = function (){
+            if(xhr.readyState === 4){
+                if(xhr.status>=200 && xhr.status<300){
+                    resolve(xhr.response)
+                }else{
+                    reject(xhr.status)
                 }
             }
-
-        }).then((value)=>{
-            console.log(value)
-        },(reason)=>{
-            console.log(reason)
-        })
-    }
+        }
+    }).then((value)=>{
+        console.log(value)
+    },(reason)=>{
+        console.log(reason)
+    })
+}
 ```
 #### 1.3.3 封装promise读取文件操作
-> 使用命令行进行运行：
-> ![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666104107489-613f2d15-7271-4b72-8ea6-935d5e39a10c.png#clientId=uc3550b84-0f11-4&crop=0&crop=0&crop=1&crop=0.2343&errorMessage=unknown%20error&from=paste&height=440&id=u96fe57a8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=599&originWidth=905&originalType=binary&ratio=1&rotation=0&showTitle=false&size=67095&status=error&style=stroke&taskId=u6877d6bf-0685-44d3-a343-f20896b14f9&title=&width=665)
-
 ```javascript
 // 封装一个函数 mineReadFile 读取文件内容
 // 参数 path 
 // 返回 promise对象
 function mineReadFile(path) {
-    return new Promise(((resolve, reject) => {
-        require('fs').readFile(path,(err, data) => {
-            if(err) reject(err);
-            resolve(data.toString())
-        })
-    }))
+  return new Promise(((resolve, reject) => {
+    require('fs').readFile(path, (err, data) => {
+      if(err) reject(err);
+         resolve(data.toString())
+      })
+  }))
 }
 
 // 使用该封装函数
 // then使用在 进行判断结果的时候
 mineReadFile('./content.txt').then(value=>{
-    console.log(value);
-},reason => {
-    console.log(reason)
+  console.log(value);
+}, reason => {
+  console.log(reason)
 })
 ```
 
 
-#### 1.3.4 util中的promisify
+#### 1.3.4 `util`中的`promisify`
 
-传入一个 函数 ：错误优先的回调风格的函数 (err,data)=>{}  一般作为最后一个参数<br />并返回一个promise的对象
+传入一个 函数 ：错误优先的回调风格的函数 `(err,data) => {}`  一般作为最后一个参数。并返回一个promise的对象
 
-1. 比如之前提到的 fs的readFile就是 错误优先的回调函数
-2. 返回的对象可以调用then
+1. 比如之前提到的  `fs.readFile` 就是 错误优先的回调函数
+2. 返回的对象可以调用`then`
 
 ```javascript
 // 传参 错误优先的回调函数
@@ -213,11 +214,11 @@ const fs = require('fs')
 // 返回一个新的 函数
 let mineReadFile = util.promisify(fs.readFile)
 // 传参调用之后 返回一个promise对象，可以调用then
-mineReadFile('./content.txt').then(value=>{
-     console.log(value.toString());
- },reason => {
-     console.log(reason)
- })
+mineReadFile('./content.txt').then(value=>{ // 出错的参数在第一位，错误优先。
+  console.log(value.toString());
+},reason => {
+  console.log(reason)
+})
 ```
 
 
@@ -227,101 +228,106 @@ mineReadFile('./content.txt').then(value=>{
 // 封装 向ajax发送请求的sendAjax函数
 // 参数 url
 // 返回 promise对象
-function sendAjax(url) {
-    return new Promise(((resolve, reject) =>{
+const sendAjax = (url) => {
+    return new Promise((resolve, reject) => {
         // 书写 ajax请求
         const xhr = new XMLHttpRequest();
-        xhr.responseType = "json"
-        xhr.open("GET",url);
+        xhr.responseType = "json";
+        xhr.open("GET", url);
         xhr.send();
         xhr.onreadystatechange = function () {
-            if(xhr.readyState === 4){
+            if (xhr.readyState === 4) {
                 // 请求成功
-                if(xhr.status >= 200 && xhr.status<300){
-                    resolve(xhr.response)
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    resolve(xhr.response);
                 }
-                reject(xhr.status)
+                reject(xhr.status);
             }
-        }
-    }))
+        };
+    });
 }
 ```
 
 
-### 1.4 promise对象
+### 1.4 `promise`对象
 
-一个promise对象的状态只能改变一次
+一个`promise`对象的状态只能改变一次：
 
-1. 属性PromiseState：pending（未定义的） resolve rejected
-2. 属性PromiseResult：存储对象成功或者失败的结果
+1. 属性`PromiseState`：`pedding`（未定义的） `resolved` `rejected`
+2. 属性`PromiseResult`：存储`promise`对象成功或者失败的结果。
 
 
 
 ## 2. Promise的API
 
 ### 2.1 工作流程
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666154078290-c107ae4a-fd1e-464c-be26-f2ffd2709f66.png#clientId=uc3550b84-0f11-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=340&id=u0df3bb3a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=425&originWidth=1383&originalType=binary&ratio=1&rotation=0&showTitle=false&size=65440&status=error&style=stroke&taskId=u6cd85af6-1a30-4d8f-a2ce-e9161ff9584&title=&width=1106.4)
+![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666154078290-c107ae4a-fd1e-464c-be26-f2ffd2709f66.png)
 
+### 2.2 构造函数API
 
+#### 1. `then`方法
 
-### 2.2 API
+传递两个参数，一个参数是成功的回调，一个是失败的回调。`then(res => {}, error => {})`。一般我们都省略失败的回调，改用`catch`。
 
-#### 2.2.1 构造函数
-#### 2.2.2 then方法
-#### 2.2.3 catch函数
-catch() 只是 then(null,failureCallback)的简化 
-#### 2.2.4 resolve函数
+#### 2. `catch`函数
+`catch()` 只是 `then(null,failureCallback)` 的简化 
 
-1. 属于是Promise函数对象的方法，而不是Promise实例对象上的。
-2. 传入参数：非Promise类型的对象，则返回结果为成功的promise对象
-3. 传入 参数：Promise对象，则参数的结果决定了resolve的结果。
+#### 3. `resolve`函数
+
+1. 属于是 `Promise` 函数对象的方法，而不是 `Promise` 实例对象上的。
+2. 传入参数：非 `Promise` 类型的对象，则返回结果为成功的 `promise` 对象
+3. 传入参数：`Promise`对象，则参数的结果决定了`resolve`的结果。
 4. 应用：
 ```javascript
-console.log(Promise.resolve(551))
+// 传参非Promise对象
+Promise.resolve(551)
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666182563682-03e157ba-ce59-43a3-bae4-385ab683e530.png#clientId=uc3550b84-0f11-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=134&id=u2aaba4a1&margin=%5Bobject%20Object%5D&name=image.png&originHeight=168&originWidth=939&originalType=binary&ratio=1&rotation=0&showTitle=false&size=37730&status=error&style=stroke&taskId=uab075467-8cde-48c3-a72f-331e8c84ccd&title=&width=751.2)
+ ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666182563682-03e157ba-ce59-43a3-bae4-385ab683e530.png)
 ```javascript
 // 传参为Promise对象
-console.log(Promise.resolve(new Promise((resolve, reject) => {
-    // resolve函数返回的结果：要看Promise对象的执行结果
-    reject("err")
-})))
+Promise.resolve(
+    new Promise((resolve, reject) => {
+      // resolve函数返回的结果：要看Promise对象的执行结果
+      reject("err")
+    })
+)
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666182809754-e709a594-e792-48f7-9e58-4cbb3e0a3bc6.png#clientId=uc3550b84-0f11-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=95&id=ud1f319b7&margin=%5Bobject%20Object%5D&name=image.png&originHeight=119&originWidth=447&originalType=binary&ratio=1&rotation=0&showTitle=false&size=9858&status=error&style=stroke&taskId=u66f1921c-2e8d-4fa6-97e3-fa87bdea87e&title=&width=357.6)
-#### 2.2.5 reject函数
+ ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666182809754-e709a594-e792-48f7-9e58-4cbb3e0a3bc6.png)
+#### 4. `reject`函数
 
-1. 返回一个失败的promise对象
-2. 失败的结果为传入的参数；无论传入什么参数，返回的都是失败的
-#### 2.2.6 all函数
+1. 返回一个失败的promise对象。
+2. 失败的结果为传入的参数；无论传入什么参数，返回的都是失败的。
+#### 5. `all`函数
 
 1. 返回结果与传入参数有关。
-2. 传入参数： 多个Promise对象组成的数组
-3. 只有数组中所有都返回成功的结果，all函数才可以返回成功结果；返回结果是参数成功结果的数组
+2. 传入参数： 多个`promise`对象组成的数组
+3. 只有数组中所有`promise`对象都返回成功的结果，`all` 函数才可以返回成功结果；返回结果是参数成功结果的数组。
 4. 成功实例：
 ```javascript
 let p1 = new Promise((resolve, reject) => {
     // 返回成功
-    resolve("ok")
+    resolve('ok')
 })
 let p2 = Promise.resolve('Success')
-let p3 = Promise.resolve("Oh")
-console.log(Promise.all([p1,p2,p3]))
+let p3 = Promise.resolve('Oh')
+Promise.all([p1, p2, p3])
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666184040466-3ec55f03-7b5d-4895-9235-1ec1d3135c7a.png#clientId=uc3550b84-0f11-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=154&id=u053a5080&margin=%5Bobject%20Object%5D&name=image.png&originHeight=192&originWidth=379&originalType=binary&ratio=1&rotation=0&showTitle=false&size=11461&status=error&style=stroke&taskId=ue59d2eca-5524-4fac-bcc2-eab0b963681&title=&width=303.2)
+ ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666184040466-3ec55f03-7b5d-4895-9235-1ec1d3135c7a.png)
 
-5. 失败实例：只返回那个失败item的结果
+5. 失败实例：只返回那个失败的`promise`实例的结果。
+
 ```javascript
 let p1 = new Promise((resolve, reject) => {
     // 返回成功
     resolve("ok")
 })
 let p2 = Promise.resolve('Success')
-  // 返回失败结果
+// 返回失败结果
 let p3 = Promise.reject("Oh Error")
-console.log(Promise.all([p1,p2,p3]))
+Promise.all([p1, p2, p3])
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666184107515-540e1580-7324-4ac6-92ff-8d97d416bfb5.png#clientId=uc3550b84-0f11-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=106&id=u0df69a36&margin=%5Bobject%20Object%5D&name=image.png&originHeight=133&originWidth=414&originalType=binary&ratio=1&rotation=0&showTitle=false&size=9991&status=error&style=stroke&taskId=u1ad7812f-3ee5-43f9-8255-17200ca4e81&title=&width=331.2)
-#### 2.2.7 race函数
+ ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666184107515-540e1580-7324-4ac6-92ff-8d97d416bfb5.png)
+#### 6. `race`函数
 ```javascript
 let p1 = new Promise((resolve, reject) => {
   // 一秒之后执行结果
@@ -330,27 +336,25 @@ let p1 = new Promise((resolve, reject) => {
   },1000)
 })
 let p2 = Promise.resolve('Success')
-let p3 = Promise.reject("Oh Error")
+let p3 = Promise.reject('Oh Error')
 // 看数组中的 三个promise对象 谁的状态优先发生改变，就返回谁的状态和结果
-// p1中1秒之后执行，那么就是p2的状态优先发生改变，所以结果就是 ‘Success’ ‘fulfilled'
-console.log(Promise.race([p1,p2,p3]))
+// p1中1秒之后执行，那么就是p2的状态优先发生改变，所以结果就是 'Success' 状态为'fulfilled'
+Promise.race([p1, p2, p3])
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666184612178-b9cc99ee-15b7-4a29-9fb0-dae4607870e5.png#clientId=uc3550b84-0f11-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=81&id=ubc8a363d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=101&originWidth=354&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6726&status=error&style=stroke&taskId=ucaf06248-23a6-4b94-b5ad-9d54e006468&title=&width=283.2)
-
-
+ ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666184612178-b9cc99ee-15b7-4a29-9fb0-dae4607870e5.png)
 
 ## 3. 关键问题
 
-### 3.1 如何改变promise的状态
+### 3.1 如何改变`promise`的状态
 
-1. 只能由pedding改为 resolved或者rejected。取决于函数执行的结果。
+1. 只能由 `pedding` 改为 `resolved` 或者 `rejected`。取决于函数执行的结果。
 #### 有三种方式
 
-1. 调用 resolve() 函数，状态变为 fulfilled (resolved)
-2. 调用 reject() 函数，状态变为 rejected
-3. 通过抛出错误，状态变为 rejected
+1. 调用 `resolve`函数，状态变为 `fulfilled` (resolved)
+2. 调用 `reject` 函数，状态变为 `rejected`
+3. 通过抛出错误，状态变为 `rejected`
 ```javascript
-const p = new Promise(resolve,reject =>{
+const p = new Promise(resolve,reject => {
   throw '出现错误啦'
 })
 ```
@@ -358,60 +362,61 @@ const p = new Promise(resolve,reject =>{
 
 ### 3.2 能否执行多个回调
 
-> 意思是 promise 实例对象 能否多次调用then方法
-> ： 只要promise的状态发生了改变，即第一个问题中的三种情况。那么就返回了一个实例对象。
+> 意思是 promise 实例对象 能否多次调用 then 方法
+> ： 
+>
+> 只要 promise 的状态发生了改变，即第一个问题中的三种情况。那么就返回了一个实例对象。
+>
 > 该实例对象就可以多次调用then方法，且都能执行。
 
 ```javascript
 const p = new Promise(resolve,reject =>{
   resolve("ok")
 })
-p.then(value=>{
+p.then(value => {
   console.log(value)
 })
-p.then(value=>{
+p.then(value => {
   alert(value)
 })
 ```
 
 
-### 3.3 改变promise状态和指定回调函数（then,catch..） 谁先谁后？
+### 3.3 改变promise状态和指定回调函数（then, catch..） 谁先谁后？
 
-> 意思是：
+意思是：
 
 ```javascript
 let p = new Promise((resolve,reject)=>{
-  resolve();  // 改变promise状态
+  resolve();  // 1. 这是改变promise状态的回调
 })
-p.then(value=>{},reason=>{})   // 指定回调
-// 注释的两者谁先执行？
+p.then(value => {},reason => {})   // 1. 指定回调 then或者catch
+// 两者谁先执行？
 ```
 
 1. 异步任务时，是先指定 回调函数，再改变状态，再指定then函数中的函数体。
 2. 同步任务时，就是按照顺序进行执行的。
 
-
-
 ### 3.4 then方法的状态由什么决定
 
-1. then执行返回一个promise对象。
-2. 结果由执行的回调函数的结果决定。即是result。
-:::info
- 详细表达:   引用pdf中内容<br />① 如果抛出异常, 新 promise 变为 rejected, reason 为抛出的异常 <br />② 如果返回的是非 promise 的任意值, 新 promise 变为 resolved, value 为返回的值 <br />③ 如果返回的是另一个新 promise, 此 promise 的结果就会成为新 promise 的结果  
-:::
+1. **`then`执行返回一个 `promise` 对象。**
+2. 结果由执行的回调函数的结果决定。即是 `PromiseResult`。
+> 详细表达:  
+>
+> ① 如果抛出异常, 新 promise 变为 rejected, reason 为抛出的异常 <br />② 如果返回的是非 promise 的任意值, 新 promise 变为 resolved, value 为返回的值 <br />③ 如果返回的是另一个新 promise, 此 promise 的结果就会成为新 promise 的结果  
+
 ```javascript
-//  then 方法的返回结果
-  let p = new Promise((resolve,reject)=>{
-    resolve('ok')
-  })
-  let result = p.then(value=>{
-    console.log(value)         //1. undefined  resolved
-    throw '出现错误啦'         //2. throw的内容 rejected
-    return 523;               //3. 该非promise类型的对象 resolved
-    return new Promise((resolve,reject)=>{
-      resolve('success')      //4. 该promise对象返回的内容 resolved
+let p = new Promise((resolve,reject) => {
+    resolve('ok') // 该promise对象返回ok
+})
+let result = p.then(value => {                // 结果                       状态
+    console.log(value)                        // 1. undefined               resolved
+    throw '出现错误啦'                         // 2. throw的内容             rejected
+    return 523;                               // 3. 该非promise类型的对象    resolved
+    return new Promise((resolve,reject) => {
+        resolve('success')                    // 4. 该promise对象返回的内容   resolved
     })
-  })
+})
 ```
 
 
@@ -419,16 +424,16 @@ p.then(value=>{},reason=>{})   // 指定回调
 
 ```javascript
 // p是一个promise对象
-    p.then(value => {
-        // 结果由返回值 决定 ：返回一个promise的成功对象
-        return new Promise((resolve, reject) => {
-            resolve('success')
-        })
-    }).then(value => {
-        console.log(value)   // 是返回的success的promise对象的调用then 所以输出结果是success
-    }).then(value => {
-        console.log(value)  // undefined 调用该then方法的并没有返回值
+p.then(value => {
+    // 结果由返回值 决定 ：返回一个promise的成功对象
+    return new Promise((resolve, reject) => {
+        resolve('success')
     })
+}).then(value => {
+    console.log(value)   // 是返回的success的promise对象的调用then 所以输出结果是success
+}).then(value => {
+    console.log(value)  // undefined 调用该then方法的并没有返回值
+})
 ```
 
 
@@ -452,15 +457,13 @@ let p = new Promise((resolve, reject) => {
  })
 
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666327014587-c96238c5-5442-4077-9f52-b3190bf73bd0.png#clientId=u0994a4f6-c309-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=139&id=u21d271ce&margin=%5Bobject%20Object%5D&name=image.png&originHeight=174&originWidth=673&originalType=binary&ratio=1&rotation=0&showTitle=false&size=10591&status=error&style=stroke&taskId=ue27f604c-8c7a-4ceb-a4b3-24cb3f8eeef&title=&width=538.4)
-
-
+ ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666327014587-c96238c5-5442-4077-9f52-b3190bf73bd0.png)
 
 ### 3.7 中断Promise链
 
-> 在一堆返回成功的then回调中，有且只有pendding状态的promise对象才能中断
+> 在一堆返回成功的then回调中，有且只有 `pedding` 状态的 `promise` 对象才能中断
+>
 > **因为状态没有改变，所以接下来的then方法都不能执行。**
-> ![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666327292356-390c27dc-0bcc-4c49-85c7-973b8894ea8e.png#clientId=u0994a4f6-c309-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=60&id=u99c89f87&margin=%5Bobject%20Object%5D&name=image.png&originHeight=75&originWidth=232&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1764&status=error&style=stroke&taskId=u252f7541-b70c-49e5-99e2-0ce2621d73b&title=&width=185.6)
 
 ```javascript
 let p = new Promise((resolve, reject) => {
@@ -469,18 +472,19 @@ let p = new Promise((resolve, reject) => {
     },1000)
 })
 // 异常穿透
- p.then(value=>{
-     console.log(11)
-     return new Promise(()=>{})
- }).then(value=>{
-     console.log(111)
- }).then(value => {
-     console.log(222)
- }).catch(reason => {
-     console.error(reason)
- })
+p.then(value=>{
+    console.log(11)
+    return new Promise(() => {})
+}).then(value=>{
+    console.log(111)
+}).then(value => {
+    console.log(222)
+}).catch(reason => {
+    console.error(reason)
+})
 ```
 
+ ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666327292356-390c27dc-0bcc-4c49-85c7-973b8894ea8e.png)
 
 ## 4. 自定义封装
 
@@ -496,7 +500,7 @@ let p = new Promise((resolve, reject) => {
 1. promise 应用：
 ```javascript
 // 1.1 初始 : 两个函数
-let p = new Promise((resolve,reject)=>{     // 3.0 传递参数是两个函数，需要在promise中定义
+let p = new Promise((resolve,reject) => {     // 3.0 传递参数是两个函数，需要在promise中定义
   resolve('ok');  
   reject('err');
   throw '出现错误啦'
@@ -576,9 +580,9 @@ let p = new Promise((resolve,reject)=>{
 // 2.1 如上：把回调函数都存在数据中 循环调用即可
 // 3.0 要查看then函数的返回结果：let result = ... 并注释掉第二次回调
 // 3.1 此刻res是一个promise对象，state状态由执行结果决定
-let res = p.then(value=>{
+let res = p.then(value => {
   console.log("第一次回调",value);
-},reason=>{
+},reason => {
   console.warn(reason);
 })
 console.log(res)
@@ -683,7 +687,7 @@ Promise.prototype.then = function(onResolved,onRejected){
   })
 }
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666692453046-e533866a-bf8b-4e89-9379-bb3d89cfe5b9.png#clientId=u155ccb42-26b0-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=650&id=u729bfee5&margin=%5Bobject%20Object%5D&name=image.png&originHeight=812&originWidth=1381&originalType=binary&ratio=1&rotation=0&showTitle=false&size=191882&status=error&style=stroke&taskId=udb43f476-031c-4df1-a754-2f27e4e8d32&title=&width=1104.8)
+![img](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666692453046-e533866a-bf8b-4e89-9379-bb3d89cfe5b9.png)
 
 
 
@@ -693,30 +697,16 @@ Promise.prototype.then = function(onResolved,onRejected){
 
 
 
-### 4.4  b站 
-
-
-
-### 4.5 
-
-
-
-### 4.6 
-
-
-
-### 4.7
-
-
+✌️[Promise | bilibili](https://www.bilibili.com/video/BV1GA411x7z1?p=34&vd_source=fd483034c51a8aa4f43cf44d83bc54a0)
 
 ## 5. async和await
-
 —— 异步编程的终极解决方案
 
 ### 5.1 async 函数
+
 > 模板：
-> 1. 函数的返回值为 promise 对象
-> 2. promise 对象的结果由 async 函数执行的返回值决定
+> 1. 函数的 **返回值为 `promise` 对象。**
+> 2. `promise` 对象的结果由 `async` 函数执行的返回值决定。
 
 ```javascript
 async function main(){
@@ -738,20 +728,20 @@ console.log(main())     // 执行结果是一个promise
 ```
 
 
-### 5.2 await表达式
+### 5.2 await 表达式
 
 > 1. await 右侧的表达式一般为 promise 对象, 但也可以是其它的值
 > 2. 如果表达式是 promise 对象, await 返回的是 promise 成功的值
 > 3. 如果表达式是其它值, 直接将此值作为 await 的返回值
-> 
-注意：
+>
+> **注意：**
+>
 > 1. await 必须写在 async 函数中, 但 async 函数中可以没有 await
 > 2. 如果 await 的 promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理
 
-:::info
-不在async函数中使用：
-:::
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/32615238/1666693950243-66ee8527-8467-425c-a677-fd5e1dba488d.png#clientId=u155ccb42-26b0-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=84&id=u7eaa72bb&margin=%5Bobject%20Object%5D&name=image.png&originHeight=105&originWidth=803&originalType=binary&ratio=1&rotation=0&showTitle=false&size=5837&status=error&style=stroke&taskId=u9e0df9e4-af87-43b9-abe4-ccc56100bf5&title=&width=642.4)
+**不在async函数中使用会报错：**
+
+ ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666693950243-66ee8527-8467-425c-a677-fd5e1dba488d.png)
 
 ```javascript
 // 基本使用
@@ -761,8 +751,8 @@ async function main(){
         resolve('OK')
     })
     // 需要赋值给res 否则是不会直接输出结果的。
-    // 如果p返回的是错误的回调，那么需要在await外包上 try catch 
-    // catch 中的e就是返回的结果，可输出
+    // 如果p返回的是错误的回调，那么需要在await外使用 try...catch捕获错误 
+    // catch 中的 e 就是返回的结果，可输出
     let res = await p;
     console.log(res)
 }
@@ -812,7 +802,7 @@ ReadFile()
 
 ### 5.3 实践
 
-关于在js中使用另一个js封装好的方法，参考 
+参考 [在JS文件调用另一个JS文件中的方法 | CSDN](https://blog.csdn.net/a949368227/article/details/121506613)
 ```javascript
 // sendAjax.js
 /**
@@ -837,7 +827,7 @@ function sendAjax(url) {
         }
     })
 }
-// sendAjax('https://api.apiopen.top/api/sentences').then(result=>{
+// sendAjax('https://api.apiopen.top/api/sentences').then(result => {
 //     console.log(result)
 // })
 
@@ -856,3 +846,7 @@ async function sendImage(){
 }
 sendImage()
 ```
+
+## 6. 使用场景
+
+[使用场景 | web前端](https://vue3js.cn/interview/es6/promise.html#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF)

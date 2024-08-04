@@ -1,5 +1,5 @@
 ---
-title: 系统修复之后
+title: 系统修复之后重装
 date: 2022-12-8
 tags:
  - 教程
@@ -7,9 +7,11 @@ categories:
  - 教程
 sidebar: 'auto'
 ---
-## 1.  node 环境变量消失。。
+## 1.  node 环境变量消失
+
 ### 1.1 配置安装根目录
-<img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1665908623778-957333ac-08da-4bec-b161-9bd1994906c2.png#averageHue=%23f9f7f6&clientId=uf1ace7c5-74a8-4&crop=0&crop=0&crop=1&crop=0.616&errorMessage=unknown error&from=paste&height=284&id=u125cb961&margin=[object Object]&name=image.png&originHeight=355&originWidth=534&originalType=binary&ratio=1&rotation=0&showTitle=false&size=18876&status=error&style=none&taskId=ub5ffaf27-6ce1-4192-b191-e4ececfcd44&title=&width=427" alt="image.png" style="zoom: 80%;" />
+
+ ![image-20231203143943186](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20231203143943186.png)
 **视为安装成功：**
 ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665908400357-18cf04fb-b870-4a9f-890b-ba3ee53cf034.png)
 
@@ -23,33 +25,56 @@ npm root -g
 > 用来告诉系统，下载的模块或者包都在该路径下了。
 > 测试下载，可看到安装在该路径下即可。
 
+## 1.0 使用nvm管理node版本
+
+正常下载nvm，手动安装。
+
+到设置node路径时，设置为你原本安装好的nodeJs路径下。弹出管理该版本的弹窗。
+
+设置环境变量。将包依赖的位置更改。
+
+[(66条消息) 安装nvm下载node，npm以及配置的全过程。解析npm下载包使用 -v指令 发现下载的包不存在的原因。_QAQshift的博客-CSDN博客](https://blog.csdn.net/o_0ava0_o/article/details/116025980#:~:text=输入以下两个指令 npm config set prefix "D%3Anvmnodejsnode_modulesnode_global",此指令表示npm下载的依赖包，将会放在node_global文件下 C%3AUsers86153>npm config set cache "D%3Anvmnodejsnode_modulesnode_cache")
+
+node安装包：[下载 | Node.js 中文网 (nodejs.cn)](https://nodejs.cn/download/)
+
+[nvm安装使用详解，以及gnvm简单介绍 - 掘金 (juejin.cn)](https://juejin.cn/post/7246416857309855801#heading-8)
+
 ## 2. java安装
+
 参考链接 
 ### 2.1 下载
 参考连接：
 下载安装包如图：
 ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665926228818-b2ad037b-0b7f-451d-b12b-a91ca79d178e.png)
+
 默认路径安装：
-<img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1665926260384-c859351e-c823-4c8f-85c8-794be17c9c61.png#averageHue=%23fbfbfa&clientId=uf1ace7c5-74a8-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=142&id=u5b000e63&margin=%5Bobject%20Object%5D&name=image.png&originHeight=178&originWidth=921&originalType=binary&ratio=1&rotation=0&showTitle=false&size=15220&status=error&style=none&taskId=u2229a91a-c379-4854-a04c-8bd717004c2&title=&width=736.8" alt="image.png" style="zoom:67%;" />
+
+![image-20231203144520929](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20231203144520929.png)
 安装成功：
-<img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1665926288311-63ca2ac0-585f-4b6c-8b99-20e0fbebb34e.png#averageHue=%23a5814d&clientId=uf1ace7c5-74a8-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=167&id=u0449b9b5&margin=%5Bobject%20Object%5D&name=image.png&originHeight=209&originWidth=708&originalType=binary&ratio=1&rotation=0&showTitle=false&size=24134&status=error&style=none&taskId=u5ccb5698-9d98-4b77-936d-415e25fccf8&title=&width=566.4" alt="image.png" style="zoom:67%;" />
+<img src="https://cdn.nlark.com/yuque/0/2022/png/32615238/1665926288311-63ca2ac0-585f-4b6c-8b99-20e0fbebb34e.png#averageHue=%23a5814d&clientId=uf1ace7c5-74a8-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown error&from=paste&height=167&id=u0449b9b5&margin=[object Object]&name=image.png&originHeight=209&originWidth=708&originalType=binary&ratio=1&rotation=0&showTitle=false&size=24134&status=error&style=none&taskId=u5ccb5698-9d98-4b77-936d-415e25fccf8&title=&width=566.4" alt="image.png" style="zoom:67%;" />
 
 ### 2.2 环境配置
 ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665923987287-15923645-eb94-4635-bbfb-4838b346ff88.png)
 ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665924009549-68b13633-dc77-46d3-a211-2575d12aba41.png)
+
 ## 3. idea和webstorm
 ### 3.1 配置git
+
 > 打开idea和webstorm变为：
+>
+>  ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665927755320-134e9be5-f9e6-4fe9-bcf5-656edf3a6cde.png)
+>
+> 在git上补充：
+>
+>  ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665927816963-9710b864-18fb-4a15-84f6-fe4ab215b091.png)
 
- ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665927755320-134e9be5-f9e6-4fe9-bcf5-656edf3a6cde.png)
-> 在git上补充
+ 
 
-![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665927816963-9710b864-18fb-4a15-84f6-fe4ab215b091.png)
 ### 3.2 环境变量
+
  ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1665927923701-6ff54365-ca59-4a06-9f90-d10a33529c70.png)
 ## 4. OneNote重新下载
-参考
-下载 OfficeSetUp.exe  
+参考：下载 OfficeSetUp.exe  
 直接点击运行即可 出现：
 ![image.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/1666018308692-4d7454dd-4015-4ae1-9321-78ddce72cf30.png)
 应该是OneNote2016版本吧。

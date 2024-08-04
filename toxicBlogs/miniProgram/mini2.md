@@ -2,7 +2,8 @@
 title: 3. 视图与逻辑
 date: 2022-12-8
 tags:
- - 原生小程序
+ - 原生
+ - 小程序
 categories:
  - 小程序
 sidebar: 'auto'

@@ -472,7 +472,7 @@ fruits.push("Orange");  // [ 'Apple', 'Orange' ]
 
 4. **Array.form()** 可以接受 Iterator和Array-like，从中获取到新数组。
 
-   :bulb:  过程：检查是否是可迭代或类数组，然后创建一个新的数组，将该对象上的所有元素复制到这个新数组。
+   :bulb:  过程：检查是否是可迭代或类数组，然后创建一个新的数组，将该对象上的所有元素复制到这个新数组。
 
    ![image-20230209144848344](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230209144848344.png)
 
@@ -490,7 +490,7 @@ fruits.push("Orange");  // [ 'Apple', 'Orange' ]
    console.log(arr)  // 1 4 9
    ```
 
-   :bulb: 接收字符串，将它转换为单个字符的数组。
+   :bulb: 接收字符串，将它转换为单个字符的数组。
 
    ```js
    let str = "xiaolian";
@@ -599,7 +599,7 @@ console.log(set)
 
 ![image-20230209183448208](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/image-20230209183448208.png)
 
-2. Set迭代：使用`for...of  forEach`进行遍历
+2. Set迭代：使用`for...of  forEach`进行遍历
 
    Map中用于迭代的方法在Set中同样支持。
 
@@ -611,7 +611,7 @@ console.log(set)
 
 ### 8.1 WeakMap
 
-:bulb: 如果使用对象作为常规Map的键，那么当Map存在时，该对象也存在。占用内存并不会被回收。
+:bulb: 如果使用对象作为常规Map的键，那么当Map存在时，该对象也存在。占用内存并不会被回收。
 
 1. `WeakMap` 在这方面有着根本上的不同。它不会阻止垃圾回收机制对作为键的对象（key object）的回收。
 2. WeakMap的键必须是对象不能是原始值。

@@ -1,16 +1,14 @@
 ---
-title: 
-date: 2022-12-8
-tags:
- - 模板
+title: 序号模板
+date: 202x-xx-xx
 categories:
  - other
 sidebar: 'auto'
 ---
 
-# 序号模板
+[toc]
 
-## 1.
+## 1.  
 
 ### 1.1
 

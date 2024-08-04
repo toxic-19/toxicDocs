@@ -2,7 +2,8 @@
 title: 2. 小程序-模板与配置[tabBar页面]
 date: 2022-12-8
 tags:
- - 原生小程序
+ - 原生
+ - 小程序
 categories:
  - 小程序
 sidebar: 'auto'

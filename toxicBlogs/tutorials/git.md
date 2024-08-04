@@ -1,8 +1,8 @@
 ---
-title: git
+title: 使用git管理项目教程
 date: 2022-12-8
 tags:
- - 教程
+ - git
 categories:
  - 教程
 sidebar: 'auto'

@@ -2,7 +2,8 @@
 title: uniapp笔记
 date: 2023-1-9
 tags:
- - uniapp框架
+ - uniapp
+ - 小程序
 categories:
  - 小程序
 sidebar: 'auto'
@@ -12,7 +13,7 @@ sidebar: 'auto'
 
 :punch: [uniapp官网](https://uniapp.dcloud.net.cn/)  :punch: b站up主的接口 [有道云笔记 (youdao.com)](https://note.youdao.com/ynoteshare/index.html?id=67403c0c586166f508eb962d39a323c9&type=note&_time=1673624518997)
 
-:punch: b站视频链接 [2022新课uniapp零基础入门到项目打包（微信小程序/H5/vue/安卓apk）](https://www.bilibili.com/video/BV1mT411K7nW/?spm_id_from=333.788.recommend_more_video.2&vd_source=fd483034c51a8aa4f43cf44d83bc54a0)
+:punch: b站视频链接 [2022新课uniapp零基础入门到项目打包（微信小程序/H5/vue/安卓apk）](https://www.bilibili.com/video/BV1mT411K7nW/?spm_id_from=333.788.recommend_more_video.2&vd_source=fd483034c51a8aa4f43cf44d83bc54a0)
 
 ### 1.1 优势
 
