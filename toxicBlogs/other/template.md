@@ -1,6 +1,6 @@
 ---
 title: 序号模板
-date: 202x-xx-xx
+date: 2024-01-01
 categories:
  - other
 sidebar: 'auto'

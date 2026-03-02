@@ -372,4 +372,5 @@ yarn add --save @nestjs/swagger swagger-ui-express
 
 
 
- <img src="../../../../Download/1694769127365.png" alt="http://localhost:3001/doc/1711865017798.jpg" style="zoom: 25%;" />
+<!-- 图片路径错误,已注释 -->
+<!-- <img src="../../../../Download/1694769127365.png" alt="http://localhost:3001/doc/1711865017798.jpg" style="zoom: 25%;" /> -->
