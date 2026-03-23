@@ -11,7 +11,7 @@ tagline: " "
 #     boxShadow: "0 15px 18px rgba(0,0,0,0.2)",
 #   } 
 isShowTitleInHome: false
-bgImage: "/img3.jpg"
+bgImage: "/img3.png"
 # bgImageStyle:
 #   {
 #     -webkit-filter: blur(3px),
