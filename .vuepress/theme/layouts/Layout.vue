@@ -1,13 +1,19 @@
 <template>
   <Common :sidebarItems="sidebarItems" :showModule="show">
-    <component v-if="$frontmatter.home" :is="homeCom"/>
+    <div
+      v-if="$frontmatter.home"
+      class="home-page-shell"
+      :style="homePageBgStyle"
+    >
+      <component :is="homeCom"/>
+      <Footer class="footer"/>
+    </div>
     <div v-else>
       <ModuleTransition v-if="sidebarItems.length > 0">
         <Page :key="path" :sidebar-items="sidebarItems"/>
       </ModuleTransition>
       <Page v-else :key="path" :sidebar-items="sidebarItems"/>
     </div>
-    <Footer v-if="$frontmatter.home" class="footer" />
   </Common>
 </template>
 
@@ -19,6 +25,7 @@ import Page from '@theme/components/Page'
 import Footer from '@theme/components/Footer'
 import Common from '@theme/components/Common'
 import { resolveSidebarItems } from '@theme/helpers/utils'
+import { getHomePageBgStyle } from '@theme/helpers/homeBgStyle'
 import { useInstance } from '@theme/helpers/composable'
 import { ModuleTransition } from '@vuepress-reco/core/lib/components'
 
@@ -58,7 +65,9 @@ export default defineComponent({
       return instance?.$page.path
     })
 
-    return { sidebarItems, homeCom, show, path }
+    const homePageBgStyle = computed(() => getHomePageBgStyle(instance))
+
+    return { sidebarItems, homeCom, show, path, homePageBgStyle }
   }
 })
 </script>

@@ -22,6 +22,7 @@
         'max-width': linksWrapMaxWidth + 'px'
       } : {}">
 
+      <DocChromeToggles />
       <Mode />
       <AlgoliaSearchBox
         v-if="isAlgoliaSearch"
@@ -39,10 +40,11 @@ import SearchBox from '@SearchBox'
 import SidebarButton from '@theme/components/SidebarButton'
 import NavLinks from '@theme/components/NavLinks'
 import Mode from '@theme/components/Mode'
+import DocChromeToggles from '@theme/components/DocChromeToggles'
 import { useInstance } from '@theme/helpers/composable'
 
 export default defineComponent({
-  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, Mode },
+  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, Mode, DocChromeToggles },
 
   setup (props, ctx) {
     const instance = useInstance()
@@ -96,8 +98,8 @@ $navbar-horizontal-padding = 1.5rem
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
   line-height $navbarHeight - 1.4rem
-  box-shadow var(--box-shadow)
-  background var(--background-color)
+  box-shadow none
+  background transparent
   a, span, img
     display inline-block
   .logo
@@ -120,7 +122,7 @@ $navbar-horizontal-padding = 1.5rem
     right $navbar-horizontal-padding
     top $navbar-vertical-padding
     display flex
-    background-color var(--background-color)
+    background-color transparent
     .search-box
       flex: 0 0 auto
       vertical-align top

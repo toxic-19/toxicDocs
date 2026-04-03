@@ -50,7 +50,7 @@ export default defineComponent({
       return `${mon}-${day}`
     }
 
-    const recoShowModule = useShowModule()
+    const { recoShowModule } = useShowModule()
 
     return { recoShowModule, go, dateFormat }
   }

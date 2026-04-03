@@ -32,7 +32,8 @@ export default defineComponent({
 
     // 时间降序后的博客列表
     const posts = computed(() => {
-      let posts = instance.$currentTags.pages
+      const pages = instance.$currentTags && instance.$currentTags.pages
+      let posts = Array.isArray(pages) ? pages : []
       posts = filterPosts(posts)
       sortPostsByStickyAndDate(posts)
       return posts

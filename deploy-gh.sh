@@ -17,7 +17,7 @@ cd .vuepress/dist
 
 git init
 git add -A
-git commit -m 'deploy'
+git commit -m "deploy $(date '+%Y-%m-%d %H:%M:%S')"
 git checkout -b master
 
 # 如果发布到 https://<USERNAME>.github.io

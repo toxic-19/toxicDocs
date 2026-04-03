@@ -12,8 +12,7 @@ export default defineComponent({
     })
 
     const isLinkActive = (header) => {
-      const active = isActive(instance.$route, instance.$page.path + '#' + header.slug)
-      return active
+      return isActive(instance.$route, instance.$page.path + '#' + header.slug)
     }
 
     return { headers, isLinkActive }
@@ -21,19 +20,35 @@ export default defineComponent({
   render (h) {
     return h('ul', {
       class: { 'sub-sidebar-wrapper': true },
-      style: { width: this.headers.length > 0 ? '12rem' : '0' }
+      style: { width: this.headers.length > 0 ? '10.5rem' : '0' }
     }, [
-      ...this.headers.map(header => {
+      ...this.headers.map((header, index) => {
         return h('li', {
+          key: header.slug || index,
           class: {
             active: this.isLinkActive(header),
             [`level-${header.level}`]: true
-          },
-          attr: { key: header.title }
+          }
         }, [
-          h('router-link', {
-            class: { 'sidebar-link': true, [`reco-side-${header.slug}`]: true },
-            props: { to: `${this.$page.path}#${header.slug}` }
+          // 仅用 hash 锚点，避免 router-link 与 $page.path / base 不一致导致跳错页空白
+          h('a', {
+            class: {
+              'sub-sidebar-link': true,
+              [`reco-side-${header.slug}`]: true
+            },
+            attrs: {
+              href: '#' + header.slug
+            },
+            on: {
+              click: (e) => {
+                e.preventDefault()
+                const path = this.$route.path
+                const hash = '#' + header.slug
+                if (this.$router) {
+                  this.$router.replace({ path, hash }).catch(() => {})
+                }
+              }
+            }
           }, header.title)
         ])
       })
@@ -44,29 +59,40 @@ export default defineComponent({
 
 <style lang="stylus" scoped>
 .sub-sidebar-wrapper
-  width 12rem
+  width 10.5rem
   padding-left 0
   list-style none
   font-size 12px
   li
-    padding .2rem 0
+    padding 0.15rem 0
     cursor pointer
-    border-left 1px solid var(--border-color)
-    a
-      padding 0.35rem 1rem 0.35rem 0rem
-      color var(--text-color)
+    border-left 1px solid rgba(15, 23, 42, 0.12)
+    .sub-sidebar-link
+      display block
+      padding 0.35rem 0.5rem 0.35rem 0.35rem
+      color var(--text-color-sub)
+      font-size 12px
+      line-height 1.45
+      text-decoration none
+      border-radius 6px
+      background transparent
+      transition color 0.15s ease, border-color 0.15s ease
     &:hover
-      a
-       color $accentColor
+      border-left-color rgba(13, 148, 136, 0.45)
+      .sub-sidebar-link
+        color $accentColor
     &.active
-      border-left 1px solid $accentColor
-      a
-       color $accentColor
+      border-left-color $accentColor
+      .sub-sidebar-link
+        color $accentColor
+        font-weight 600
     &.level-1
-      padding-left .4rem
+      padding-left 0.2rem
     &.level-2
-      padding-left .9rem
+      padding-left 0.55rem
     &.level-3
-      padding-left 1.5rem
-</style>
+      padding-left 1rem
 
+.dark .sub-sidebar-wrapper li
+  border-left-color rgba(255, 255, 255, 0.12)
+</style>

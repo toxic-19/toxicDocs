@@ -45,6 +45,7 @@ export default {
       })
     },
     $tagesList () {
+      if (!this.$tags || !this.$tags.list) return []
       return this.$tags.list.map(tag => {
         tag.pages = tag.pages.filter(page => {
           return page.frontmatter.publish !== false

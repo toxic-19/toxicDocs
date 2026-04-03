@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref, onMounted } from 'vue'
+import { defineComponent, computed, ref, onMounted, provide } from 'vue'
 import Navbar from '@theme/components/Navbar'
 import Sidebar from '@theme/components/Sidebar'
 import PersonalInfo from '@theme/components/PersonalInfo'
@@ -53,6 +53,7 @@ import Password from '@theme/components/Password'
 import SubSidebar from '@theme/components/SubSidebar'
 import { setTimeout } from 'timers'
 import { useInstance } from '@theme/helpers/composable'
+import { loadDocChromeState, saveDocChromeLeft, saveDocChromeRight } from '@theme/helpers/docChrome'
 
 export default defineComponent({
   components: { Sidebar, Navbar, Password, PersonalInfo, SubSidebar },
@@ -81,6 +82,27 @@ export default defineComponent({
     const firstLoad = ref(true)
 
     const shouldShowSidebar = computed(() => props.sidebarItems.length > 0)
+
+    const docChromeInit = loadDocChromeState()
+    const showLeftNav = ref(docChromeInit.left)
+    const showRightOutline = ref(docChromeInit.right)
+
+    const toggleLeftNav = () => {
+      showLeftNav.value = !showLeftNav.value
+      saveDocChromeLeft(showLeftNav.value)
+    }
+    const toggleRightOutline = () => {
+      showRightOutline.value = !showRightOutline.value
+      saveDocChromeRight(showRightOutline.value)
+    }
+
+    provide('docChrome', {
+      hasSidebar: shouldShowSidebar,
+      showLeftNav,
+      showRightOutline,
+      toggleLeftNav,
+      toggleRightOutline
+    })
     const absoluteEncryption = computed(() => {
       return instance.$themeConfig.keyPage && instance.$themeConfig.keyPage.absoluteEncryption === true
     })
@@ -107,6 +129,13 @@ export default defineComponent({
         'no-navbar': !shouldShowNavbar.value,
         'sidebar-open': isSidebarOpen.value,
         'no-sidebar': !shouldShowSidebar.value
+      }
+
+      if (shouldShowSidebar.value && !showLeftNav.value) {
+        classValue['hide-left-doc-nav'] = true
+      }
+      if (!showRightOutline.value) {
+        classValue['hide-right-doc-outline'] = true
       }
 
       const { pageClass: userPageClass } = instance.$frontmatter || {}

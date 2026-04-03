@@ -1,49 +1,62 @@
 <template>
   <main class="page" :style="pageStyle">
-    <section v-show="recoShowModule">
-      <div class="page-title">
-        <h1 class="title">{{$page.title}}</h1>
-        <PageInfo :pageInfo="$page" :showAccessNumber="showAccessNumber"></PageInfo>
+    <section v-show="recoShowModule" class="page-doc">
+      <div class="page-doc__card">
+        <div class="page-title">
+          <h1 class="title">{{ $page.title }}</h1>
+          <PageInfo :pageInfo="$page" :showAccessNumber="showAccessNumber" />
+        </div>
+        <Content class="theme-reco-content" />
       </div>
-      <!-- 这里使用 v-show，否则影响 SSR -->
-      <Content class="theme-reco-content" />
     </section>
 
-    <footer v-if="recoShowModule" class="page-edit">
-      <div class="edit-link" v-if="editLink">
-        <a
-          :href="editLink"
-          target="_blank"
-          rel="noopener noreferrer"
-        >{{ editLinkText }}</a>
-        <OutboundLink/>
-      </div>
+    <footer v-if="recoShowModule && (editLink || lastUpdated)" class="page-doc page-doc--footer">
+      <div class="page-doc__card page-doc__card--compact">
+        <div class="page-edit">
+          <div class="edit-link" v-if="editLink">
+            <a
+              :href="editLink"
+              target="_blank"
+              rel="noopener noreferrer"
+            >{{ editLinkText }}</a>
+            <OutboundLink/>
+          </div>
 
-      <div
-        class="last-updated"
-        v-if="lastUpdated"
-      >
-        <span class="prefix">{{ lastUpdatedText }}: </span>
-        <span class="time">{{ lastUpdated }}</span>
+          <div
+            class="last-updated"
+            v-if="lastUpdated"
+          >
+            <span class="prefix">{{ lastUpdatedText }}: </span>
+            <span class="time">{{ lastUpdated }}</span>
+          </div>
+        </div>
       </div>
     </footer>
 
-    <div class="page-nav" v-if="recoShowModule && (prev || next)">
-      <p class="inner">
-        <span v-if="prev" class="prev">
-          <router-link v-if="prev" class="prev" :to="prev.path">
-            {{ prev.title || prev.path }}
-          </router-link>
-        </span>
-        <span v-if="next" class="next">
-          <router-link v-if="next" :to="next.path">
-            {{ next.title || next.path }}
-          </router-link>
-        </span>
-      </p>
+    <div v-if="recoShowModule && (prev || next)" class="page-doc page-doc--nav">
+      <div class="page-doc__card page-doc__card--compact">
+        <div class="page-nav">
+          <p class="inner">
+            <span v-if="prev" class="prev">
+              <router-link v-if="prev" class="prev" :to="prev.path">
+                {{ prev.title || prev.path }}
+              </router-link>
+            </span>
+            <span v-if="next" class="next">
+              <router-link v-if="next" :to="next.path">
+                {{ next.title || next.path }}
+              </router-link>
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
 
-    <Comments v-if="recoShowModule" :isShowComments="shouldShowComments"/>
+    <div v-if="recoShowModule && shouldShowComments" class="page-doc page-doc--footer">
+      <div class="page-doc__card page-doc__card--compact">
+        <Comments :isShowComments="shouldShowComments"/>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -63,7 +76,7 @@ export default defineComponent({
 
     const { sidebarItems } = toRefs(props)
 
-    const recoShowModule = useShowModule()
+    const { recoShowModule } = useShowModule()
 
     // 是否显示评论
     const shouldShowComments = computed(() => {
@@ -111,7 +124,7 @@ export default defineComponent({
 
     const next = computed(() => {
       const frontmatterNext = instance.$frontmatter.next
-      if (next === false) {
+      if (frontmatterNext === false) {
         return
       } else if (frontmatterNext) {
         return resolvePage(instance.$site.pages, frontmatterNext, instance.$route.path)
@@ -225,18 +238,15 @@ function flatten (items, res) {
 
 <style lang="stylus">
 @require '../styles/wrapper.styl'
+@require '../styles/page-doc.styl'
 
 .page
   position relative
   padding-top 5rem
   padding-bottom 2rem
-  padding-right 14rem
+  // 与 Common 中右侧大纲 right:2rem + SubSidebar 宽度对齐，略收紧以让中间阅读区更宽
+  padding-right 13rem
   display block
-  .page-title
-    max-width: $contentWidth;
-    margin: 0 auto;
-    padding: 1rem 2.5rem;
-    color var(--text-color)
   .theme-reco-content h2
     position relative
     padding-left 0.8rem
@@ -249,9 +259,8 @@ function flatten (items, res) {
       content ''
       border-left 5px solid $accentColor
   .page-edit
-    @extend $wrapper
-    padding-top 1rem
-    padding-bottom 1rem
+    padding-top 0
+    padding-bottom 0
     overflow auto
     .edit-link
       display inline-block
@@ -266,28 +275,17 @@ function flatten (items, res) {
         color $accentColor
       .time
         font-weight 400
-        color #aaa
-  .comments-wrapper
-    @extend $wrapper
+        color var(--text-color-sub)
 
-.page-nav
-  @extend $wrapper
-  padding-top 1rem
-  padding-bottom 0
-  .inner
-    min-height 2rem
-    margin-top 0
-    border-top 1px solid var(--border-color)
-    padding-top 1rem
-    overflow auto // clear float
+.page .page-doc .page-nav .inner
+  min-height 2rem
+  overflow auto
   .next
     float right
 
 @media (max-width: $MQMobile)
   .page
     padding-right 0
-    .page-title
-      padding: 0 1rem;
     .page-edit
       .edit-link
         margin-bottom .5rem

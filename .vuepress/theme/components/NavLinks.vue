@@ -111,7 +111,6 @@ export default defineComponent({
         userNav.value.splice(parseInt(tag.location || 3) - 1, 0, {
           link: '/tag/',
           text: tag.text || instance.$recoLocales.tag,
-          type: 'links',
           icon: 'reco-tag'
         })
       }
@@ -119,8 +118,9 @@ export default defineComponent({
       return userNav.value
     })
 
+    // 必须使用上面的 nav 计算结果：instance.nav 不存在，blogConfig 注入的分类/标签只写在 nav 里
     const userLinks = computed(() => {
-      return (instance.nav || []).map(link => {
+      return (nav.value || []).map(link => {
         return Object.assign(resolveNavLinkItem(link), {
           items: (link.items || []).map(resolveNavLinkItem)
         })

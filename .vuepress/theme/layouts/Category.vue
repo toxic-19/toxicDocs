@@ -10,7 +10,7 @@
         :key="index">
         <router-link :to="item.path">
           <span class="category-name">{{ item.name }}</span>
-          <span class="post-num" :style="{ 'backgroundColor': getOneColor() }">{{ item.pages.length }}</span>
+          <span class="post-num">{{ item.pages.length }}</span>
         </router-link>
       </li>
     </ul>
@@ -29,7 +29,6 @@ import { defineComponent, computed } from 'vue'
 import Common from '@theme/components/Common'
 import NoteAbstract from '@theme/components/NoteAbstract'
 import { sortPostsByStickyAndDate, filterPosts } from '@theme/helpers/postData'
-import { getOneColor } from '@theme/helpers/other'
 import { useInstance } from '@theme/helpers/composable'
 
 export default defineComponent({
@@ -62,7 +61,6 @@ export default defineComponent({
     return {
       posts,
       title,
-      getOneColor,
       getCurrentTag,
       paginationChange
     }
@@ -74,57 +72,117 @@ export default defineComponent({
 <style src="prismjs/themes/prism-tomorrow.css"></style>
 <style lang="stylus" scoped>
 .categories-wrapper
-  max-width: $contentWidth;
-  margin: 0 auto;
-  padding: 4.6rem 2.5rem 0;
-  .category-wrapper {
+  max-width $contentWidth
+  margin 0 auto
+  padding 4.6rem 2.5rem 0
+
+  .category-wrapper
+    display flex
+    flex-wrap wrap
+    align-items center
+    gap 0.5rem 0.55rem
     list-style none
-    padding-left 0
-    .category-item {
-      vertical-align: middle;
-      margin: 4px 8px 10px;
-      display: inline-block;
-      cursor: pointer;
-      border-radius: $borderRadius
-      font-size: 13px;
-      box-shadow var(--box-shadow)
-      transition: all .5s
-      background-color var(--background-color)
-      &:hover, &.active {
-        background $accentColor
-        a span.category-name {
+    padding 0
+    margin 1.5rem 0 1.75rem
+
+  .category-item
+    margin 0
+    padding 0
+    list-style none
+    display inline-block
+    vertical-align middle
+    a
+      display flex
+      align-items center
+      justify-content space-between
+      gap 0.5rem
+      min-width 0
+      max-width 100%
+      box-sizing border-box
+      padding 0.35rem 0.85rem
+      border-radius 999px
+      font-size 0.8125rem
+      font-weight 500
+      line-height 1.35
+      text-decoration none
+      color var(--text-color)
+      background rgba(15, 23, 42, 0.045)
+      border 1px solid rgba(15, 23, 42, 0.1)
+      box-shadow none
+      transition background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease
+    .category-name
+      flex 1
+      min-width 0
+      overflow hidden
+      text-overflow ellipsis
+      white-space nowrap
+    .post-num
+      flex-shrink 0
+      margin-left 0
+      min-width 1.35rem
+      padding 0 0.4rem
+      height 1.35rem
+      display inline-flex
+      align-items center
+      justify-content center
+      border-radius 999px
+      font-size 0.7rem
+      font-weight 600
+      line-height 1
+      color var(--text-color-sub)
+      background rgba(15, 23, 42, 0.08)
+    &:hover:not(.active) a
+      color $accentColor
+      border-color rgba(13, 148, 136, 0.35)
+      background rgba(13, 148, 136, 0.08)
+      transform translateY(-1px)
+      .post-num
+        background rgba(13, 148, 136, 0.15)
+        color $accentColor
+    &.active a
+      color #fff
+      background $accentColor
+      border-color $accentColor
+      box-shadow 0 2px 10px rgba(13, 148, 136, 0.28)
+      transform none
+      .category-name
+        color #fff
+      .post-num
+        background rgba(255, 255, 255, 0.25)
+        color #fff
+      &:hover
+        color #fff
+        background lighten($accentColor, 4%)
+        border-color lighten($accentColor, 4%)
+        .post-num
+          background rgba(255, 255, 255, 0.32)
           color #fff
-          .post-num {
-            color $accentColor
-          }
-        }
-      }
-      a {
-        display flex
-        box-sizing border-box
-        width 100%
-        height 100%
-        padding: 8px 14px;
-        justify-content: space-between
-        align-items center
-        color: #666
-        .post-num {
-          margin-left 4px
-          width 1.2rem;
-          height 1.2rem
-          text-align center
-          line-height 1.2rem
-          border-radius $borderRadius
-          font-size .7rem
-          color #fff
-        }
-      }
-    }
-  }
+
+.dark .categories-wrapper
+  .category-item a
+    background rgba(255, 255, 255, 0.06)
+    border-color rgba(255, 255, 255, 0.12)
+  .category-item:not(.active) .post-num
+    background rgba(255, 255, 255, 0.1)
+    color var(--text-color-sub)
+  .category-item.active a .post-num
+    background rgba(255, 255, 255, 0.25)
+    color #fff
+  .category-item:hover:not(.active) a
+    color lighten($accentColor, 12%)
+    border-color rgba(13, 148, 136, 0.45)
+    background rgba(13, 148, 136, 0.12)
+    .post-num
+      background rgba(13, 148, 136, 0.2)
+      color lighten($accentColor, 12%)
+  .category-item.active a
+    color #fff
+    .category-name
+      color #fff
 
 @media (max-width: $MQMobile)
   .categories-wrapper
-    padding: 4.6rem 1rem 0;
+    padding 4.6rem 1rem 0
   .page-edit
     .edit-link
       margin-bottom .5rem

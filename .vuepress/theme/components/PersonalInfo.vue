@@ -63,6 +63,7 @@ export default defineComponent({
     width 6rem
     height 6rem
     border-radius 50%
+    box-shadow 0 0 0 3px rgba(13, 148, 136, 0.25), 0 12px 28px rgba(15, 23, 42, 0.12)
   }
   .name {
     font-size 1rem
@@ -77,7 +78,7 @@ export default defineComponent({
       text-align center
       flex 0 0 50%
       &:first-child {
-        border-right 1px solid #333
+        border-right 1px solid var(--border-color)
       }
       h3 {
         line-height auto

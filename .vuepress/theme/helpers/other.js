@@ -38,10 +38,10 @@ export function interceptRouterError (router) {
 }
 
 export function fixRouterError404 (router) {
-  const routes = router.getRoutes()
+  const routes = typeof router.getRoutes === 'function' ? router.getRoutes() : []
   router.beforeEach((to, from, next) => {
     // 解决decode后反复重定向的问题
-    const route = routes.find((v) => v.regex.test(to.path))
+    const route = routes.find((v) => v && v.regex && v.regex.test(to.path))
 
     // .html有重定向路由，无需特殊处理
     if (/\.html$/.test(to.path)) {
