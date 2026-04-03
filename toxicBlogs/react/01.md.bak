@@ -7,7 +7,6 @@ sidebar: 'auto'
 pageClass: no-vue-template
 ---
 
-<div v-pre>
 
 注意：本文不是在脚手架中学习的。
 
@@ -570,7 +569,11 @@ create-react-app [projectName]  # 创建React应用
 
 安装脚手架中下载 `react` `react-dom` `react-scripts` 等。
 
- ![image-20240627200004603](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406272000692.png)    <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406272009286.png" alt="image-20240627200922223" style="zoom:110%;" />     <img src="https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406272010665.png" alt="image-20240627201022613" style="zoom:90%;" />
+ ![image-20240627200004603](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406272000692.png)
+
+ ![image-202406272009286.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406272009286.png)
+
+ ![image-202406272010665.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406272010665.png)
 
 
 
@@ -578,4 +581,4 @@ create-react-app [projectName]  # 创建React应用
 
 ### 5.2
 
-### 5.3</div>
+### 5.3

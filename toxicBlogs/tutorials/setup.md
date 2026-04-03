@@ -1,4 +1,11 @@
-# 记录Macbook安装开发环境 2026版
+---
+title: 记录Macbook安装开发环境 2026版
+date: 2026-03-08
+categories:
+ - 教程
+sidebar: 'auto'
+
+---
 
 系统设置：macOS版本26.3.2 芯片Apple M4
 
@@ -256,7 +263,7 @@ eval "$(uv generate-shell-completion zsh) # 自动补全
 
 ```bash
 uv init # 会生成pyproject.toml 文件
-uv add requests # 添加依赖
+uv add requests # 如果跑其他人的项目，看到有toml文件就可以执行该命令进行添加依赖
 uv run hello.py # 运行文件
 ```
 
