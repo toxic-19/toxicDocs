@@ -62,6 +62,11 @@ module.exports = {
         title: "语雀",
         link: "https://www.yuque.com/toxic-19",
         icon: "/yuque.png"
+      },
+      {
+        title: "GitHub",
+        link: "https://github.com/toxic-19",
+        logo: "https://github.githubassets.com/favicons/favicon.svg"
       }
       // {
       //   title: "林嫄袁",
