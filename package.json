@@ -1,0 +1,23 @@
+{
+  "name": "toxicdocs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev . --host \"localhost\"",
+    "build": "vuepress build .",
+    "deploy": "bash deploy-gh.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitepress-plugin-autobar": "^1.0.8",
+    "vuepress": "^1.9.8",
+    "vuepress-plugin-auto-sidebar": "^2.3.2",
+    "vuepress-plugin-boxx": "^0.0.7",
+    "vuepress-plugin-nuggets-style-copy": "^1.0.3",
+    "vuepress-theme-hope": "^1.30.0",
+    "vuepress-theme-reco": "^1.6.16"
+  }
+}

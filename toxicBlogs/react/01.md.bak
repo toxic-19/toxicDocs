@@ -1,0 +1,584 @@
+---
+title: 01. React基础知识
+date: 2024-05-24
+categories:
+ - react
+sidebar: 'auto'
+pageClass: no-vue-template
+---
+
+
+注意：本文不是在脚手架中学习的。
+
+## 1. 简介
+
+参考学习链接：
+
+1. [linjunc/react-study: 🎉 Here are all the high-quality React articles, a React repository worth learning (github.com)](https://github.com/linjunc/react-study)
+2. [尚硅谷React教程（已加更新版内容，B站最火）_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1wy4y1D7JT/?spm_id_from=333.337.search-card.all.click&vd_source=fd483034c51a8aa4f43cf44d83bc54a0)
+3. [React 官方中文文档](https://zh-hans.react.dev/)
+
+
+
+### 概念：
+
+> React是一个将数据渲染为HTML视图的开源JavaScript库。
+>
+> 2013年开源。
+
+
+
+### 原生 JS 的痛点：
+
+原生 JavaScript 操作 DOM 效率低 —— 导致浏览器不断的重绘重排，性能不好
+
+原生 JavaScript 没有组件化（模块化）编码方案 —— 代码复用率低。
+
+JS 的模块化 —— 即将一个很大的JS文件按照不同的功能点拆分为不同的JS模块。
+
+
+
+### React特点：
+
+1. 组件化模式、声明式编程
+2. React Native 可以使用 React 语法进行移动端开发
+3. 使用虚拟 DOM 和 diff 算法，减少和真实 DOM 之间的交互
+   1. 使用虚拟 DOM，不总直接操作页面的真实 DOM
+   2. DOM Diff 算法，最小化页面重绘
+
+![image-20240524132854326](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202405241328580.png)
+
+
+
+### 简单上手：
+
+依赖：react.js 需在 react-dom.js 之前引入
+
+ ![image-20240524193141366](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202405241931430.png)
+
++ react.js: React 的核心库  提供对象 `React`
++ react-dom.js: 提供操作 DOM 的 react 扩展库 提供对象 `ReactDOM`
++ babel.min.js: 解析 JSX 语法代码转为纯 JS 语法代码的库
++ prop-type.js：提供 `PropTypes` 为 props 添加限制条件
+
+​    ![image-20240601000714246](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406010007319.png)
+
+```text
+  <body>
+    <div class="test"></div>
+    <script src="./react.development.js"></script>
+    <script src="./react-dom.development.js"></script>
+    <script src="./babel.min.js"></script>
+    <!-- <script type="text/javascript"></script> 默认标签内写的是javascript语法 -->
+    <!-- 包含需要babel理解的jsx语法 -->
+    <script type="text/babel">
+      // 1. 创建虚拟dom 嵌套标签
+      const vDOM = (
+        <h1 id="title">
+          <span className="name">Hello, React</span> {/* 需要class属性的时候使用className */}
+        </h1>
+      ) // 标签必须闭合
+      // 2. 渲染虚拟dom到页面上
+      ReactDOM.render(vDOM, document.querySelector(".test"))
+    </script>
+  </body>
+```
+
+
+
+### DOM
+
+**虚拟 DOM**
+
+1. 本质上是一个 Object 类型的对象
+2. 拥有的属性远远小于真实DOM上带有的属性和方法，更加轻便。
+3. 虚拟 DOM 最终会被 React 转变为真实 DOM，呈现在页面上。
+
+ ![image-20240524221644317](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202405242220832.png)
+
+
+
+**真实 DOM**
+
+> 使用 `console.dir` 可以打印出真实DOM元素的属性和方法
+
+
+
+## 2. JSX
+
+在线转换器：[HTML to JSX (transform.tools)](https://transform.tools/html-to-jsx)
+
+> 标签语法；XML 早期用于存储和传输数据
+>
+> 全称：JavaScript XML —— React 定义的一种类似于 XML 的 JS 扩展语法：JS + XML
+>
+> 本质：React.createElement(component, props, ...children) 的语法糖
+>
+> 作用：用来简化创建虚拟 DOM
+
+```text
+// JS 写法
+const element = React.createElement('h1', { id: 'title' }, 'hello')
+// 如果要嵌套的话需要重新调用React.createElement
+// 上面创建的就是简单的虚拟 DOM 对象
+```
+
+```text
+const element = <h1>Hello, React</h1> 
+// 不是字符串
+// element 就是一个虚拟对象 即Object类型的对象
+```
+
+### 2.1 注意：
+
+1. 标签即为 HTML 标签，所有标签都必须闭合 `<input />` `<br />`
+
+2. 属性即为 HTML 属性
+
+3. 遇到 `<` 开头 以标签的语法解析
+
+4. 遇到 `{` 开头 以 JS 的语法解析：标签中的 JS 表达式代码必须使用 `{ }` 包含
+
+5. 样式的类名指定要用className，不能用class
+
+6. 内联样式，要用 style = {{ key: value }}  两个大括号。原因是 `style={ }` JSX 大括号内的一个普通 `{}` 对象。
+
+7. 自定义标签：
+
+   （1）若小写字母开头，则转为html中的同名元素；若html中无对应的同名元素则报错。
+
+   （2）若大写字母开头，react 就去渲染对应的组件，若组件没有定义，则报错。
+
+   **React 组件必须以大写字母开头，而 HTML 标签则必须是小写字母。**
+
+8. JSX 比 HTML 更加严格
+9. 组件也不能返回多个 JSX 标签，必须将它们包裹到一个共享的父级中。比如 `<div>...</div>` 或使用空的 `<>...</>` 包裹
+
+ ![image-20240524224914710](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202405242249752.png)
+
+```text
+const name = "Hello, React - jsx"
+const claasname = "name-js"
+// 1. 创建虚拟dom 只允许有一个根标签，要不嵌套 <div></div> 要不就 <></>
+const vDOM = (
+  <h1 id="title">
+    <span className={claasname}>{name}</span>
+  </h1>
+) // 标签必须闭合
+// 2. 渲染虚拟dom到页面上
+ReactDOM.render(vDOM, document.querySelector(".test"))
+```
+
+
+
+### 2.2 遍历
+
+> 1. 使用大括号 `{}` 包裹住 JS 表达式。不能写 JS 代码和 JS 语句哦！如 for 循环或 if 判断等等
+> 2. 遍历需要 key 值
+> 3. 使用高级函数编程 如 map filter 等
+
+```text
+const array = ["Angular", "Vue", "React"] // 数组会自动遍历
+const VDOM = (
+  <div>
+    <h1>前端JS框架列表</h1>
+    <ul>
+      {
+        array.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))
+      }
+    </ul>
+  </div>
+)      
+ReactDOM.render(VDOM, document.querySelector(".test"))
+```
+
+ ![image-20240524233709350](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202405242337441.png)
+
+
+
+### 2.2 条件渲染
+
+1. 在 JSX 语法外部写 JS 语句，再在 JSX 内部使用。
+2. 使用三目运算 `condition ? res1 : res2`
+3. 使用逻辑与 `&&` 运算 `condition && res` 
+
+
+
+### 2.3 事件处理
+
+1. 绑定事件的时候**不要调用，即加上小括号**。只需要将函数传递给事件即可。
+
+```text
+<script type="text/babel">
+  // 声明响应事件
+  function handleClick() {
+  	alert("You clicked me!")
+  }
+  const VDOM = <h1 onClick={handleClick}>前端JS框架列表</h1>
+  ReactDOM.render(VDOM, document.querySelector(".test"))
+</script>
+```
+
+
+
+### 2.4 组件定义
+
+1. 使用大写字母定义**工厂函数组件**（属于简单组件）
+
+```text
+const array = ["Angular", "Vue", "React"] // 数组会自动遍历
+function Demo() {
+  // babel 编译为 JS 的时候开启了严格模式。严格模式下this指向undefined
+  return (
+    <ul>
+      {array.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  )
+}
+ReactDOM.render(<Demo />, document.querySelector(".test"))
+// <Demo /> 必须大写且闭合
+// 否则会被当做普通html标签渲染
+// render所做的流程：
+// 1. react解析组件标签，找到了Demo组件。
+// 2. 发现组件是使用函数定义的，随后调用该函数。将返回的虚拟DOM转为真实DOM，随后呈现在页面上。
+```
+
+ ![image-20240525135627782](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202405251356860.png)
+
+2. **ES6 类组件**（复杂组件）
+
+```text
+const array = ["Angular", "Vue", "React"] // 数组会自动遍历
+class ArrayList extends React.Component {
+  render() {
+    console.log(this) // ArrayList 的实例对象
+    return (
+      <ul>
+        {array.map((item, index) => {
+          return <li key={index}>{item}</li>
+        })}
+      </ul>
+    )
+  }
+}
+ReactDOM.render(<ArrayList />, document.querySelector(".test"))
+// render所做的流程：
+// 1. react解析组件标签，找到了 ArrayList 组件。
+// 2. 发现组件是使用类定义的，随后实例化该类获得组件实例对象。并通过该实例调用原型上的render方法。
+// 3. 将render返回的虚拟DOM转为真实DOM，随后呈现在页面上。
+```
+
+
+
+:question:**怎么区别简单组件和复杂组件呢？**
+
+复杂组件是拥有状态的。
+
+## 3. 组件实例的三大属性
+
+> 只针对 组件是由类定义的情况。毕竟函数定义的组件连 this 都没有，怎么会有实例呢？
+
+### 3.1 State
+
+```text
+class Weather extends React.Component {
+  constructor(props) {
+    super(props) // 继承组件为了获取state
+    // 初始化状态 state是组件对象中最重要的属性。对象形式（包含多个数据）
+    this.state = {
+      isHot: true
+    }
+  }
+  render() {
+    return <h1>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h1>
+  }
+}
+```
+
+**组件被称为"状态机"，通过更新组件的 `state `来更新对应的页面显示（重新渲染组件）**
+
+读取状态：`this.state.property`
+
+更改状态：`this.setState({ key: value })`
+
+```text
+class Weather extends React.Component {
+  // 只在初始化的时候调用一次
+  constructor(props) {
+    super(props)
+    this.state = {
+      isHot: true,
+      wind: "big"
+    }
+  }
+  // 初始化调用一次后，每次修改状态就调用一次 共1 + n次
+  render() {
+    return (
+      <h1 onClick={this.changeWeather}>
+        今天天气很{this.state.isHot ? "炎热" : "凉爽"}
+      </h1>
+    )
+  }
+  // changeWeather ———— 放在Weather的原型对象上，供实例使用
+  // 通过 Weather 实例调用时，该函数中的this就是Weather实例
+  // 但是一般自定义方法是为了作为onClick的回调，并不是通过实例进行调用
+  // 直接写 function changeWeather() {} 是无法拿到Weather实例的。this指向undefined
+  // 自定义函数要使用赋值语句+箭头函数的方式
+  changeWeather = () => {
+    const isHot = this.state.isHot
+    this.setState({ isHot: !isHot }) // 此时数据更改，视图重新渲染，只更改你修改的部分，其他属性值不变
+    console.log(this.state)
+  }
+}
+ReactDOM.render(<Weather />, document.querySelector(".test"))
+```
+
+**注意：**
+
+1. render 方法中 this 为组件实例对象
+2. 组件中自定义的方法 this 指向 undefined
+   1. 强制绑定 this，在constructor中通过 bind 来绑定 this
+   2. 箭头函数
+3. 状态数据，不能直接更改 如`this.state.wind = 'xxxx'`
+
+### 3.2 Props
+
+在使用组件的时候，传递类似 `key - value` 的形式。
+
+在 render 函数中去获取组件的 props
+
+```text
+render() {
+  const { date } = this.props
+  return (
+    <h1 onClick={this.changeWeather}>
+      今天{date}天气很{this.state.isHot ? "炎热" : "凉爽"}
+    </h1>
+  )
+}
+
+ReactDOM.render(
+  <Weather date="星期一" />, 
+  document.querySelector(".test")
+)
+// 从这里传递props
+```
+
+
+
+**批量传递props**
+
+前端：在合适的时候发出合适的请求 将合适的数据展示到合适的位置。
+
+```text
+// 一个一个写
+ReactDOM.render(
+  <Weather date="星期一" xxx="jjj" />,
+  document.querySelector(".test")
+)
+```
+
+```text
+const props = { name: 'jack', age: 18 }
+// 将要传递的属性值放在对象中进行批量传递
+ReactDOM.render(
+  <Person {...props} />,
+  document.querySelector(".test")
+)
+```
+
+
+
+**对 props 进行限制**
+
+```text
+Weather.propTypes = {
+  date: PropTypes.string.isRequired
+}
+// 如果想传递number类型 但是如今的传递是默认字符串的
+// num = {1} 可以通过这种方式传递number类型
+ReactDOM.render(
+  <Weather date="星期一" />,
+  document.querySelector(".test")
+)
+```
+
+
+
+**添加 props 默认值**
+
+```text
+Weather.defaultProps = {
+  date: "世界末日"
+}
+```
+
+注意：可以将 `propTypes `和 `defaultProps `属性加到 类本身上。效果同 `Weather.propTypes` 但更加整洁。
+
+```text
+class Weather extends React.Component {
+  static propTypes = {}
+  static defaultProps = {}
+  constructor(props) {}
+  render() {}
+}
+```
+
+
+
+使用函数的形式定义组件的时候，直接在 function 后传递 props 即可。
+
+如果需要对 props 进行限制的话，可能需要直接在 函数式组件 的外侧。
+
+
+
+### 3.3 Refs 与 事件处理
+
+组件内的标签都可以使用 `ref` 来标识自己。
+
+字符串形式的标识：`ref='input1'` 该标识会被 React 组件实例中的 `refs` 收集起来。**已过时！尽量避免这种写法！**
+
+回调函数形式的标识：`ref={(input) => (this.msgInput = input)}` 
+
+​									 此时的 `msgInput`是直接挂在实例上，不需要额外声明。
+
+`createRef API`：`this.msgRef = createRef()`
+
+
+
+**回调函数形式：**
+
+1. 如果是使用内联函数定义的，在更新过程中会被调用两次。该dom会变成null 之后才是input标签。
+
+```text
+render() {
+  return (
+    <div>
+      <input type="text" ref={(input) => (this.msgInput = input)} />
+      {/* 这种形式就叫做内联形式 */}
+      <button onClick={this.alertData}>点击弹出左侧提示</button>
+    </div>
+  )
+}
+```
+
+ ![image-20240601173027785](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406011730883.png)
+
+使用 类函数 进行定义可以避免更新过程中的重新渲染
+
+```text
+<input type="text" ref={this.setRef} />  {/* 类函数绑定形式 */}
+
+setRef = (currentNode) => {
+  this.msgInput = currentNode
+  console.log("@", currentNode)
+}
+```
+
+
+
+**API 形式**
+
+在组件中直接声明变量，赋值为`createRef()`
+
+使用时：
+
+```text
+<input type="text" ref={this.setRef} />  {/* setRef是创建出来的变量。直接放在实例身上 */}
+```
+
+
+
+## 4. 生命周期
+
+### 4.1 旧生命周期
+
+ ![image-20240627142623592](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406271426669.png)
+
+![img](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406262335040.webp)
+
+1. `shouldComponentUpdate` 在 开发者 `setState` 之后，询问是否要进行更新，返回 `boolean` 类型。
+
+   在组件更新之前调用，可以控制组件是否进行更新。
+
+   注意：不能在该钩子中调用 `setState()` 否则会导致无限循环调用更新。
+
+   默认返回`true`
+
+2. `React` 从 v16.3 开始废弃
+
+    `componentWillMount` --- 
+
+    `componentWillReceiveProps`  --- 
+
+    `componentWillUpdate` --- 
+
+   
+
+### 4.2 New LifeCycle
+
+![img](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406270005875.webp)
+
+#### `constructor(props?)`
+
+1. 在为 `React.Component` 子类实现构造函数时，应在其他语句之前调用 `super()`
+2. 仅用于 初始化 `state `，以及为事件处理函数绑定实例。
+3. 如果不初始化 `state`，就不需要写 `constructor`，只需要设置 `this.state` 即可。
+4. 不能在 `constructor` 里面调用 `this.setState()` 因为 `render `还未执行意味着 `DOM` 节点还未挂载。
+
+#### `getDerivedStateFromProps(nextProps, state)`
+
+1. 在调用 render 之前调用，在初始化和后续更新都会被调用。
+2. 属于静态函数。不能使用 this
+3. nextProps 为即将更新的 props，state 为 上一个状态的 state。可以通过比较 `nextProps` 和 `state` 来加限制条件以防无用的`state`更新。
+
+#### `render()`
+
+1. 不能在 `render` 中去更新`setState` ，否则会造成死循环导致内存崩溃。
+2. 必须实现，用于渲染DOM，且需要返回`rectDOM` 
+
+#### `componentDidMount()`
+
+1. 在组件挂载之后立即调用。**即插入DOM树**
+2. 是发送网络请求、启用事件监听方法的好时机。可以在该钩子函数中使用 `setState()`
+
+
+
+### 4.3 `DOM Diffing`
+
+
+
+
+
+## 5. 脚手架
+
+使用`create-react-app`来创建`react`应用。
+
+模块化 - 组件化 - 工程化
+
+整体架构：`react` + `webpack` + `es6` + `eslint`
+
+```shell
+npm install -g create-react-app # 全局安装create-react-app
+create-react-app [projectName]  # 创建React应用
+```
+
+安装脚手架中下载 `react` `react-dom` `react-scripts` 等。
+
+ ![image-20240627200004603](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406272000692.png)
+
+ ![image-202406272009286.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406272009286.png)
+
+ ![image-202406272010665.png](https://gitee.com/zhizhu_wlz/image-for-md/raw/master/202406272010665.png)
+
+
+
+### 5.1
+
+### 5.2
+
+### 5.3
